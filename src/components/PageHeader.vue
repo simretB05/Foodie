@@ -1,17 +1,9 @@
 <template>
     <header class="header">
-        <img src="/images/icons/logo.svg" alt="logo image">
-        <h2>Foodie</h2>
-        <nav class="nav">
-            <router-link to="/">Login Page</router-link>
-            <router-link to="/client-profile page">Proile Page</router-link>
-            <router-link to="/discover page">Discover Page</router-link>
-            <router-link to="/orders page">Orders Page</router-link>
-            <router-link to="/restaurant login page">Restaurant Login</router-link>
-            <router-link to="/restaurant profile page">Restaurant Profile</router-link>
-            <router-link to="/restaurant public page">Restaurant Page</router-link>
-            <router-link to="/shopping cart">shopping Cart</router-link>
-        </nav>
+        <div class="logo_holder"> 
+            <img src="/images/icons/foodie-logo.svg" alt="logo image">
+        </div>
+       <img src="/images/icons/menu-icon.svg" alt="menu icon image">
     </header>
 </template>
 <script>
@@ -21,7 +13,16 @@
 </script>
 
 <style scoped>
+.header{
+    display:grid;
+    place-items:center;
+    min-height:10vh;
+}
+.logo_holder{
+    justify-self: start;
+}
 img{
-    width: 50px;
+    width: 70px;
+     height:70px
 }
 </style>

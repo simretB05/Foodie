@@ -1,14 +1,16 @@
 <template>
     <div>
-       <page-header></page-header>
+        <page-header></page-header>
        <p>uuuuuu</p>
     </div>
 </template>
 
 <script>
-import PageHeaderVue from '@/components/PageHeader.vue'
+import PageHeader from '@/components/PageHeader.vue'
     export default {
-        PageHeaderVue
+    components: {
+        PageHeader
+    }
     }
 </script>
 
