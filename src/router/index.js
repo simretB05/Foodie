@@ -1,34 +1,49 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import ClientHomePage from '@/views/ClientHomePage.vue'
+import MainHomePage from '@/views/MainHomePage.vue'
+// import ClientHomePage from '@/views/ClientHomePage.vue'
+import ClientSignupForm from '@/views/ClientSignupForm'
+import ClientLoginPage from '@/views/ClientLoginPage'
+// import RestaurantHomePage from '@/views/RestaurantHomePage.vue'
 // import ClientLoginPage from '@/views/ClientLoginPage.vue'
-// import ClientProfilePage from '@/views/ClientProfilePage.vue'
-// import DiscoverPage from '@/views/DiscoverPage.vue'
-// import OrdersPage from '@/views/OrdersPage.vue'
+import ClientProfilePage from '@/views/ClientProfilePage.vue'
+import DiscoverPage from '@/views/DiscoverPage.vue'
+import OrdersPage from '@/views/OrdersPage.vue'
 // import RestaurantLoginPage from '@/views/OrdersPage.vue'
 // import RestaurantProfilePage from '@/views/RestaurantProfilePage.vue'
 // import RestaurantPublicPage from '@/views/RestaurantPublicPage.vue'
 // import ShoppingCart from '@/views/ShoppingCart.vue'
-// import TestingPage from '@/views/TestingPage.vue'
+
 
 Vue.use(VueRouter)
 
 const routes = [
-  
- 
-  //     {
-  //       path: '/',
-  //       component: TestingPage,
-  // },
-  {
-        path: '/',
-        component: ClientHomePage,
-      }
+                {
+                  path: '/',
+                  component:MainHomePage ,
+                },
+                {
+                  path: '/user-login',
+                  component: ClientLoginPage,
+                },
+                {
+                  path: '/user-signup',
+                  component:ClientSignupForm,
+                },  {
+                  path: '/discovery-page',
+                  component:DiscoverPage,
+                },
+                {
+                  path: '/client-profile-page',
+                  component:ClientProfilePage,
+                },
+                {
+                  path: '/client-orders',
+                  component:OrdersPage,
+                },
     
-    ]
-        
-
-
+]
+    
 const router = new VueRouter( {
   mode: 'history',
   base: process.env.BASE_URL,

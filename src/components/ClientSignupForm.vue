@@ -1,6 +1,7 @@
 <template>
     <div>
-        <img :src="image_url" alt="profile image">
+        <label for="email">Your profile Image</label>
+        <input type="text" v-model="image_url" placeholder="enter your picture"> 
         <label for="email">Email</label>
         <input  v-model="email_value" type="text" required placeholder="enter your email">
         <label  for="first name">First Name</label>
@@ -28,7 +29,7 @@ export default {
                 pass_value: undefined,
                 email_value: undefined,
                 UserName_value: undefined,
-                image_url: `images/profile-img.jpg`,
+                image_url: undefined,
                 token: undefined,
                 client_id:undefined
                 
@@ -36,7 +37,8 @@ export default {
         },
     methods: {
         getResponse(){
-Cookies.set(`client`, this.token)
+           
+
             axios.request( {
                 // Url to send the post Method
                 url: `https://foodie.bymoen.codes/api/client`,
@@ -46,10 +48,10 @@ Cookies.set(`client`, this.token)
                 method: `POST`,
                 data: {
                     // data values required to send a POST login
-                    email: this.email_value,
+                    email:this.email_value,
                     first_name: this.firstName_value,
                     last_name: this.lastName_value,
-                    image_url:`/images/profile-img.jpg`,
+                    image_url:this.image_url,
                     username: this.UserName_value,
                     password: this.pass_value,
                 
@@ -57,14 +59,16 @@ Cookies.set(`client`, this.token)
                 // on a response, assign a variable to the value of a response  
             } ).then( ( response ) =>
             {
-                this.token = response[`data`][`token`]
-                this.client_id = response[`data`][`token`]
+
+                Cookies.set( `client`, response[`data`][`token`] )
+                Cookies.set(`client_id`,  response[`data`][`client_id`])
+
 
                 console.log(response)
                 //set Cookies with a value of response from axios POST method
                 // Cookies.set( `token`, this.token )
                 // changing page once successful
-                // this.$router.push( `/gamePage` )
+                this.$router.push( `/discovery-page` )
             } ).catch( ( error ) =>
             {
                 error;

@@ -1,15 +1,18 @@
 <template>
     <div>
        <page-header></page-header>
-       <p>Login Page oooo</p>
+       <client-login-form></client-login-form>
     </div>
 </template>
 
 <script>
-    import PageHeader from '@/components/PageHeader.vue';
+import PageHeader from '@/components/PageHeader.vue';
+import ClientLoginForm from '@/components/ClientLoginForm.vue';
+
     export default {
     components: {
-            PageHeader
+            PageHeader,
+            ClientLoginForm,
         }
     }
 </script>

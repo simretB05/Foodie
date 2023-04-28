@@ -1,17 +1,13 @@
 <template>
     <div>
-<client-signup-form></client-signup-form>
-
-
+        <page-header></page-header>
     </div>
 </template>
-
 <script>
-import ClientSignupForm from '@/components/ClientSignupForm.vue'
-
+    import PageHeader from '@/components/PageHeader.vue';
     export default {
     components: {
-        ClientSignupForm 
+        PageHeader,
     },
     data() {
         return {
@@ -24,7 +20,6 @@ import ClientSignupForm from '@/components/ClientSignupForm.vue'
 }
     
 </script>
-<!-- https://foodie.bymoen.codes/api/client -->
 <style scoped>
 
 </style>
