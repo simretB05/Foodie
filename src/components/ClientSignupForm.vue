@@ -31,14 +31,11 @@ export default {
                 UserName_value: undefined,
                 image_url: undefined,
                 token: undefined,
-                client_id:undefined
-                
+                client_id:undefined   
             }
         },
     methods: {
         getResponse(){
-           
-
             axios.request( {
                 // Url to send the post Method
                 url: `https://foodie.bymoen.codes/api/client`,
@@ -57,26 +54,18 @@ export default {
                 
                 }
                 // on a response, assign a variable to the value of a response  
-            } ).then( ( response ) =>
-            {
-
-                Cookies.set( `client`, response[`data`][`token`] )
-                Cookies.set(`client_id`,  response[`data`][`client_id`])
-
-
-                console.log(response)
-                //set Cookies with a value of response from axios POST method
-                // Cookies.set( `token`, this.token )
-                // changing page once successful
+            } ).then( ( response ) => {
+                Cookies.set( `token`, response[`data`][`token`] )
+                Cookies.set(`client_id`, response[`data`][`client_id`])
                 this.$router.push( `/discovery-page` )
             } ).catch( ( error ) =>
             {
                 error;
-                // if not successful displaying a error mssage
                 this.errorMessage = "Invalid input! Please try again."
             } )
         }
-    }
+    },
+  
     }
 </script>
 

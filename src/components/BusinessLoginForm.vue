@@ -28,7 +28,6 @@ import Cookies from "vue-cookies"
     },
     methods: {
         getLogInResponse(){
-   
 
             axios.request( {
                 // Url to send the post Method

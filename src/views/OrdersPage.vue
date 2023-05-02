@@ -13,7 +13,23 @@
     components: {
             PageHeader,
             ClientOrders
-        }
+    },
+    methods: {
+        getClientInfo( userData ){
+            for ( let i = 0; i < userData.length; i++ ){
+                this.first_name = userData[i][`first_name`]
+            }
+        },
+        
+    },
+    mounted(){
+        this.$root.$on( `userData`, this.getClientInfo );
+        console.log( `this` )
+        this.$root.$on('userData', ( userDataArry ) =>{
+            console.log( 'on user data:', userDataArry );
+        } )
+          
+    }
     }
 </script>
 

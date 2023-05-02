@@ -18,9 +18,11 @@ import ClientSignupForm from '@/components/ClientSignupForm.vue'
             return {
             }
     },
+    
     methods: {
             
-        },
+    },
+        
     }
 </script>
 
