@@ -2,21 +2,21 @@
     <div>
 <business-page-header></business-page-header>
 <main class="main">
-    <business-login-form></business-login-form>
+    <business-signup-form></business-signup-form>
 </main>
 <business-page-footer></business-page-footer>
     </div>
 </template>
 
 <script>
-import BusinessLoginForm from '@/components/BusinessLoginForm.vue'
+import BusinessSignupForm from '@/components/BusinessSignupForm.vue'
 import BusinessPageHeader from '@/components/BusinessPageHeader.vue'
 import BusinessPageFooter from '@/components/BussinessPageFooter.vue'
     export default {
     components: {
-        BusinessLoginForm ,
-        BusinessPageHeader,
-        BusinessPageFooter
+            BusinessSignupForm,
+            BusinessPageHeader,
+            BusinessPageFooter
         }
     }
 </script>

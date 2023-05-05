@@ -1,6 +1,8 @@
 <template>
     <div>
         <page-header></page-header>
+        <main class="main">
+        </main>
     </div>
 </template>
 <script>
@@ -26,5 +28,7 @@
     
 </script>
 <style scoped>
-
+.main{
+    /* background-image: url("../../public/images/home-image.jpg"); */
+}
 </style>

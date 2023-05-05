@@ -1,17 +1,27 @@
 <template>
     <div>
+        
        <page-header></page-header>
-       <client-signup-form></client-signup-form>
+       <main class="main">
+        <div class="main-card">
+            <h2> Create a Foodie Account </h2>
+            <client-signup-form></client-signup-form>
+        </div>
+     
+       </main>
+      <page-footer></page-footer>
     </div>
 </template>
 
 <script>
 import PageHeader from '@/components/PageHeader.vue';
 import ClientSignupForm from '@/components/ClientSignupForm.vue'
+import PageFooter from '@/components/PageFooter.vue';
     export default {
     components: {
             PageHeader,
-            ClientSignupForm
+            ClientSignupForm,
+            PageFooter
             
     },
         data() {
@@ -27,5 +37,18 @@ import ClientSignupForm from '@/components/ClientSignupForm.vue'
 </script>
 
 <style scoped>
+.main{
+min-height: 80vh;
+background-color:#f5f3f1 ;
+display:grid;
+place-items:center
+}
+.main-card{
+    margin-top:32px;
+    width: 100%;
+    display:grid;
+    place-items:center;
+    align-self: start;
 
+}
 </style>

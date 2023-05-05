@@ -1,7 +1,9 @@
 <template>
     <div>
-        <!-- <img :src="profile_url" alt="profile image">
-        <img :src="banner_url" alt="banner image"> -->
+        <label for="email">Your Bussiness profile Image</label>
+        <input type="text" v-model=" banner_url" placeholder="enter your picture"> 
+        <label for="email">Your Bussiness Banner Image</label>
+        <input type="text" v-model=" profile_url" placeholder="enter your picture"> 
         <label for="email">Email</label>
         <input  v-model="email" type="text" required placeholder="enter your email">
         <label  for="Business name">Business Name</label>
@@ -35,15 +37,14 @@ export default {
                 password:undefined,
                 bio: undefined,
                 city:undefined,
-                profile_url: `https://images.pexels.com/photos/1126728/pexels-photo-1126728.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1`,
-                banner_url:`https://images.pexels.com/photos/1126728/pexels-photo-1126728.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1`,
-                token: undefined,
-                client_id: undefined
+                profile_url: undefined,
+                banner_url:undefined,
+                restaurant_token: undefined,
+                restaurant_id:undefined
             }
         },
     methods: {
         getResponseToken(){
-Cookies.set(`client`, this.token)
             axios.request( {
                 // Url to send the post Method
                 url: `https://foodie.bymoen.codes/api/restaurant`,
@@ -63,20 +64,15 @@ Cookies.set(`client`, this.token)
                     banner_url:this.banner_url,
                     password: this.password,
                 
-                 
-                
                 }
                 // on a response, assign a variable to the value of a response  
-            } ).then( ( response ) =>
-            {
-                // this.token = response[`data`][`token`]
-                // this.client_id = response[`data`][`token`]
-
-                console.log(response)
+            } ).then( ( response ) => {
+                this.restaurant_token = response[`data`][`token`]
+                this.restaurant_id = response[`data`][`restaurantId`]
                 //set Cookies with a value of response from axios POST method
-                // Cookies.set( `token`, this.token )
-                // changing page once successful
-                // this.$router.push( `/gamePage` )
+                Cookies.set( `restaurant_token`, this.restaurant_token )
+                Cookies.set( `restaurant_id`, this.restaurant_id )
+                this.$router.push(`/partner-home`) 
             } ).catch( ( error ) =>
             {
                 error;

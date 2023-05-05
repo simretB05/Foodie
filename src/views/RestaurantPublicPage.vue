@@ -1,15 +1,15 @@
 <template>
     <div>
-       <page-header></page-header>
-       <p>Login Page oooo</p>
+<business-page-header></business-page-header>
+       <p>this is where partners will come to see other partners profile  after login or sign up discovery for restyrants</p>
     </div>
 </template>
 
 <script>
-    import PageHeader from '@/components/PageHeader.vue';
+    import BusinessPageHeader from '@/components/BusinessPageHeader.vue';
     export default {
     components: {
-            PageHeader
+        BusinessPageHeader
         }
     }
 </script>

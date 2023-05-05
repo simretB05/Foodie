@@ -1,22 +1,34 @@
 <template>
-
     <header class="header">
         <div class="logo_holder"> 
-            <router-link to="/"><img src="/images/icons/foodie-logo.svg" alt="logo image"></router-link>
+            <router-link to="/"><img class="logo" src="/images/icons/foodie-logo.svg" alt="logo image"></router-link>
         </div>
-        <div   @click="primaryToggleHandler"  class="nav_user_menu_card">    
-            <img v-if="!getClient_id" class="nav_user_menu_img" src="/images/icons/user.svg" alt=" login avatar">
+        <div   @click="primaryToggleHandler"   v-if="!getClient_id" class="nav_user_menu_card">    
+            <img v-if="!getClient_id" class="nav_user_menu_img" src="/images/icons/menu.svg" alt=" menu-icon">
         </div>
-        <div v-if="getClient_id">
-            <div  class="nav_user_login_menu" >
-                <router-link to="/"><img src="/images/icons/shop.svg" alt="enter icon"></router-link> 
-                <router-link to="/client-orders">
-                    <img class="nav_user_signup_img" src="/images/icons/clipboard-list-check.svg" alt=" login avatar"></router-link> 
-                    <div @click="secondaryToggleHandler" class="nav_user_menu_card">    
-                <img class="nav_user_menu_img" src="/images/icons/user.svg" alt=" login avatar">
+        <nav class="desktop_nav"  v-if="!getClient_id">
+            <ul class="nav_desktop_list">
+                <router-link to="/user-login" class="nav-link" >
+                    <li class="desktoplist_item">
+                        <img class="nav_desktop_userImage" src="/images/icons/enter.svg" alt="enter icon">
+                        <p class="nav_desktoplogin_text">Log In</p> 
+                        </li>
+                </router-link>
+                <router-link to="/user-signup" class="nav-link"> 
+                    <li class="desktoplist_item">
+                        <div class="deskImage-holder">
+                                <img class="nav_desktopuser_signup_img" src="/images/icons/user.svg" alt=" login avatar">
+                        </div>
+                        <p class="nav_desktopsingup_text">Sing Up</p>
+                    </li>
+                </router-link> 
+            </ul>
+        </nav>
+        <div v-if="getClient_id || is_scondaryNavOpen" class="menu-icon-holder">
+            <div @click="secondaryToggleHandler" class="nav_user_menu_card" > 
+                <img class="nav_user_menu_img" src="/images/icons/menu.svg" alt=" login avatar">
             </div>
-            <h3>{{ first_name }}</h3>
-            </div>
+            <h3> Welcome {{ first_name }}!</h3>
         </div>
         <nav v-if="is_primaryNavOpen" class="primary-nav">
             <div class="primary_nav_card">
@@ -24,27 +36,68 @@
                 <ul  class="main_nav">
                     <li class="nav_user_login_card">
                         <img  class="nav_user_login_img" src="/images/icons/enter.svg" alt="enter icon">
-                        <router-link to="/user-login" ><p class="nav_login_text">Log In</p> </router-link>
+                        <router-link to="/user-login"   class="nav-link"><p class="nav_login_text">Log In</p> </router-link>
                     </li>
                     <li class="nav_user_signup_card">
                         <div class="nav_user_avatar_card" >    
                             <img class="nav_user_signup_img" src="/images/icons/user.svg" alt=" login avatar">
                         </div>
-                        <router-link to="/user-signup"><p class="nav_singup_text">Sing Up</p> </router-link> 
+                        <router-link to="/user-signup"  class="nav-link"><p class="nav_singup_text">Sing Up</p> </router-link> 
                     </li>
                 </ul>
             </div>
         </nav>
         <nav  v-if="is_scondaryNavOpen" class="secondary-nav">
             <div  class="secondary_nav_card"  >
-                <h3 class="title">Welcome {{ first_name }}!</h3>
-                <ul class="secondery-main_nav">
-                    <li class="nav_user_login_card">
-                        <router-link to="/client-profile-page"><img class="nav_user_signup_img" src="/images/icons/user.svg" alt=" login avatar"><p  class="nav_login_text">View Account</p> </router-link>
+                <h3 class="secondery-title">Welcome {{ first_name }}!</h3>
+                <ul class="secondery_nav_list">
+                    <router-link   class="nav-link" to="/client-profile-page">
+                        <li class="secondery_nav_item">
+                            <img class="item_img" src="/images/icons/user.svg" alt=" login avatar"><p  class="item_text">View Account</p>
+                        </li>
+                    </router-link>
+                    <router-link   class="nav-link" to="/client-orders">
+                        <li class="secondery_nav_item">
+                            <img class="item_img" src="/images/icons/clipboard-list-check.svg" alt=" login avatar">
+                            <p class="item_text">Orders</p>
+                        </li>
+                    </router-link> 
+                    <router-link   class="nav-link" to="/discovery-page">
+                        <li class="secondery_nav_item">
+                            <img  class="item_img" src="/images/icons/shop.svg" alt="enter icon">
+                            <p class="item_text">Restaurants</p>
+                        </li>
+                    </router-link>
+                    <li class="secondery_nav_item">
+                        <button  class="logout_btn" @click="logoutHandler">Logout</button>
                     </li>
-                    <li class="nav_user_signup_card">
-                        <router-link to="/client-orders">
-                            <img class="nav_user_signup_img" src="/images/icons/clipboard-list-check.svg" alt=" login avatar"><p class="nav_singup_text">Orders</p></router-link> 
+                </ul>
+            </div>
+        </nav>
+        <nav  v-if="getClient_id || is_scondaryNavOpen" class="secondary-nav-desktop">
+            <h3 class="seconderydesktop-title">Welcome {{ first_name }}!</h3>
+
+            <div  class="secondary_desktopnav_card"  >
+                <ul class="seconderydesktop_nav_list">
+                    <router-link   class="nav-link" to="/client-profile-page">
+                        <li class="seconderydesktop_nav_item">
+                            <img class="desktopitem_img" src="/images/icons/user.svg" alt=" login avatar"><p  class="seconderydesktopitem_text">View Account</p>
+                        </li>
+                    </router-link>
+                    <router-link   class="nav-link" to="/client-orders">
+                        <li class="seconderydesktop_nav_item">
+                            <img class="desktopitem_img" src="/images/icons/clipboard-list-check.svg" alt=" login avatar">
+                            <p class="seconderydesktopitem_text">Orders</p>
+                        </li>
+                    </router-link> 
+                    <router-link   class="nav-link" to="/discovery-page">
+                        <li class="seconderydesktop_nav_item">
+                            <img  class="desktopitem_img" src="/images/icons/shop.svg" alt="enter icon">
+                            <p class="seconderydesktopitem_text">Restaurants</p>
+                        </li>
+                    </router-link>
+                    <li class="seconderydesktop_nav_item">
+                        <button  class="desktoplogout_btn" @click="logoutHandler">Logout</button>
                     </li>
                 </ul>
             </div>
@@ -58,7 +111,8 @@ export default {
     data() {
         return {
             // username:undefined,
-            getClient_id: Cookies.get(`client_id`),
+            getClient_id: Cookies.get( `client_id` ),
+            clientInfo_json:undefined,
             is_primaryNavOpen: false,
             is_scondaryNavOpen: false,
             first_name: undefined,
@@ -68,19 +122,38 @@ export default {
     methods: {
         primaryToggleHandler(){
             this.is_primaryNavOpen = !this.is_primaryNavOpen
+           
+            
         },
         secondaryToggleHandler(){
             this.is_scondaryNavOpen = !this.is_scondaryNavOpen
+         
+        },
+        logoutHandler(){
+            Cookies.remove( `client_id` )
+            Cookies.remove( `client_info` )
+            Cookies.remove( `token` )
+            this.$router.push( `/` )
+            location.reload();
         },
         getClientInfo( userData ){
-            for ( let i = 0; i < userData.length; i++ ){
-                this.first_name = userData[i][`first_name`]
+            if ( this.first_name !== undefined ) {
+                this.first_name=this,this.first_name
+            } else{
+                this.first_name = userData[`first_name`]
+                this.$root.$on( `userData`, this.getClientInfo );
             }
-        },
-        
+            location.reload();
+        }
     },
+
     mounted(){
-            this.$root.$on( `userData`, this.getClientInfo );
+        if ( this.first_name === undefined ){
+            this.clientInfo_json= Cookies.get(`client_info`)
+               this.first_name=this.clientInfo_json[`first_name`]
+            } else{
+                this.$root.$on( `userData`, this.getClientInfo );
+            }
           
     }
     }
@@ -98,9 +171,25 @@ export default {
 .logo_holder{
     justify-self: start;
 }
-img{
-    width: 68px;
-    height:68px
+.logo{
+    width: 50px;
+}
+.menu-icon-holder{
+display: grid;
+place-items: center;
+justify-self: end;
+}
+.nav_user_menu_card{
+    width:40px;
+    height: 40px;
+    background-color: #f1f2f4;
+    border-radius:60% ;
+    display: grid;
+    place-items: center;
+    justify-self: end;
+}
+.nav_user_menu_img{
+    width: 60%;
 }
 .primary-nav,.secondary-nav{
     display:grid;
@@ -108,109 +197,193 @@ img{
     position: absolute; 
     top: 100%;
 	right: 0;
-    width: 20%;
-    height: 100vh;
-    border: 1px solid #0c0d0c;
-    background-color:#ffffff;
-	
+    width: 68%;
+    height: 79.9vh;
+    background-color:#f1f2f4;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);	
 }
-/* .primary_nav_card,.secondary_nav_card{ */
-    /* display:grid;
-    place-items:center;
-    position: absolute;
-	
-    width: 20%;
-    border: 1px solid #7ed957;
-    background-color:#ffffff; */
-/* } */
-/* .nav_title{
-    justify-self:start;
-    align-self: start;
-    padding:16px;
-    width: 90%;
-    text-align: start;
-    margin-top:40px;
-    color:#5e6b77
 
-}
-.main_nav,.main_business_nav{
+.primary_nav_card,.secondary_nav_card{
+    width: 50%;
+    height: 30vh;
     display:grid;
-    place-items:center;
-    height: 10vh;
     align-self: start;
-    justify-self: end;
-    list-style: none;
-    width: 90%;
-}
-
-.nav_user_login_card,.nav_user_signup_card,.nav_user_menu{
-    display: grid;
-    place-items: start;
-    width:116px;
-    grid-template-columns:repeat(auto-fit, minmax(50px, 1fr));
+    justify-items: start;
     justify-self: start;
+    padding: 16px;
 }
-.nav_login_text,.nav_singup_text{
-    text-align: start;
-    font-size:1rem ;
-    font-weight: 700;
+
+.nav_title{
+ height: 20px;
+ color: #7ed957;
+}
+
+.main_nav,.secondery_nav_list{
+    display:grid;
+    place-items: center;
+    list-style: none;
+    gap:16px;
+
 
 }
-.nav_user_avatar_card,.nav_user_menu_card{
-  display: grid;
-  place-items: center;
-  width:40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #f1f2f4;
-  border: 2px solid #7ed957;
-  justify-self: start;
-}
-.nav_user_signup_img,.nav_user_menu_img{
-    width: 20px;
-    height: 20px;
-    align-self: center;
-    justify-self: center;
+.nav_user_login_card,
+.nav_user_signup_card,
+.secondery_nav_item{
+    width: 140px;
+    display:grid;
+    place-items: center;
+    font-size: 1rem;
     grid-template-columns:repeat(auto-fit, minmax(50px, 1fr));
+}
+.nav_user_avatar_card{
+    width:40px;
+    height: 40px;
+    background-color:#7ed957;
+    border-radius:60% ;
+    display: grid;
+    place-items: center;
+}
+.nav-link{
+    text-decoration: none;
+}
+.nav_login_text,.nav_singup_text,.item_text{
+    color: #7ed957;
+    text-decoration: none;
+    font-weight: 700;
+    justify-items: start;
 
+}
+.nav_user_signup_img,.item_img{
+ width: 20px;
+ height: 30px;
+ justify-self: center;
 }
 .nav_user_login_img{
-    width: 26px;
-    height: 26px;
-    align-self: center;
-    justify-self: center;
-    grid-template-columns:repeat(auto-fit, minmax(50px, 1fr));
-    justify-self: start;
-
+ width: 30px;
+ height: 30px;
+}
+.desktop_nav,.secondary-nav-desktop{
+display: none;
+}
+.secondery-title{
+    color: #7ed957;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.2rem;
+    
 }
 
-.nav_business_login_card,.nav_business_signup_card{
-    display: grid;
-    place-items: start;
-    width:146px;
-    grid-template-columns:repeat(auto-fit, minmax(73px, 1fr));
+.logout_btn,.desktoplogout_btn{
     justify-self: start;
+    background-color:#7ed957 ;
+    width: 100px;
+    padding: 8px;
+    border:none;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);	
+    color:white;
 }
-
-.secondary-nav{
+.nav_user_login_card{
+    
+}
+@media only screen and (min-width: 600px) {
+    .primary-nav,.secondary-nav{
+        width: 40%;
+    }
+}
+@media only screen and (min-width: 900px) {
+    .primary-nav{
+     display: none;
+   
+    }
+    .nav_user_menu_card{
+    display: none;
+    }
+    .desktop_nav{
     display:grid;
     place-items:center;
-    position: absolute;
-	top: 100%;
-	right: 0;
-	height: 80vh;
-    width: 80%;
-    border: 1px solid #7ed957;
-}
-.nav_user_menu{
-    display:grid;
-    place-items:center;
+    }
+
+    .nav_desktop_list{
+     display:grid;
+    place-items:center; 
+    width: 300px;
+    grid-template-columns:repeat(auto-fit, minmax(50px, 1fr)); 
     justify-self: end;
+    list-style: none;
+    }    
+    .desktoplist_item{
+        width: 160px;
+        display:grid;
+        place-items: center;
+        font-size: 1rem;
+        grid-template-columns:repeat(auto-fit, minmax(11px, 1fr));
+
+        }
+        .deskImage-holder{
+        width:40px;
+        height: 40px;
+        background-color:#7ed957;
+        border-radius:60% ;
+        display: grid;
+        place-items: center;
+        }
+    .nav_desktop_userImage{
+        width: 30px;
+        height: 30px;
+        justify-self: end;
+       }
+    .nav_desktopuser_signup_img{
+            width: 20px;
+            height: 30px;
+
+        }
+.nav_desktopsingup_text,.nav_desktoplogin_text{
+color: #7ed957;
+text-decoration: none;
+font-weight: 700;
+font-size: 1.2rem;
+}
+.menu-icon-holder{
+    display: none;
+}
+.secondary-nav{
+  display: none;
+}
+.secondary-nav-desktop{
+    display: grid;
+    place-items:center;
+    width: 100%;
+}
+.secondary_desktopnav_card{
+    width: 100%;
+display: grid;
+place-items:center;
 
 }
-.nav_user_menu_card{
-    justify-self:end;
-} */
-
+.seconderydesktop-title{
+    color: #7ed957;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.2rem;
+    justify-self: end;
+    margin-bottom: 16px;
+}
+.seconderydesktop_nav_list{
+list-style: none;
+display: grid;
+place-items:center;
+width: 60%;
+grid-template-columns:repeat(auto-fit, minmax(11px, 1fr));
+justify-self: end;
+}
+.desktopitem_img{
+ width: 30px;
+}
+.seconderydesktopitem_text{
+   color: #7ed957;
+   font-weight: 700;
+   
+}
+}
 
 </style>

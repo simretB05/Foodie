@@ -1,8 +1,17 @@
 <template>
     <div>
        <page-header></page-header>
-       <client-login-form></client-login-form>
-       <h2>{{ errorMessage }}</h2>
+       <main class="main">
+        <div class="main-card">
+            <h2>Login To Your Foodie Account </h2>
+
+            <client-login-form></client-login-form>
+            <h2>{{ errorMessage }}</h2>
+        </div>
+      
+     
+       </main>
+       <page-footer></page-footer>
     </div>
 </template>
 
@@ -11,11 +20,14 @@
     import axios from "axios";
 import PageHeader from '@/components/PageHeader.vue';
 import ClientLoginForm from '@/components/ClientLoginForm.vue';
+import PageFooter from "@/components/PageFooter.vue";
 
     export default {
     components: {
             PageHeader,
             ClientLoginForm,
+            PageFooter
+
     },
         data() {
             return {
@@ -50,4 +62,18 @@ import ClientLoginForm from '@/components/ClientLoginForm.vue';
 
 <style scoped>
 
+.main{
+min-height: 80vh;
+background-color:#f5f3f1 ;
+display:grid;
+place-items:center
+}
+.main-card{
+    margin-top:32px;
+    width: 100%;
+    display:grid;
+    place-items:center;
+    align-self: start;
+
+}
 </style>

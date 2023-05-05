@@ -1,6 +1,5 @@
 <template>
     <div>
-       <page-header></page-header>
        <div>
             <label for="email"> Enter Your Email</label>
             <input  v-model="email" type="text" required placeholder="enter your email">
@@ -13,16 +12,14 @@
 <script>
 import axios from "axios";
 import Cookies from "vue-cookies"
-    import PageHeader from '@/components/PageHeader.vue';
     export default {
     components: {
-            PageHeader
     },
     data() {
         return {
                 password: undefined,
                 email: undefined,
-                token: undefined,
+                restaurant_token: undefined,
                 restaurant_id:undefined
         }
     },
@@ -44,12 +41,9 @@ import Cookies from "vue-cookies"
                 }
                 // on a response, assign a variable to the value of a response  
             } ).then( ( response ) =>{
-                Cookies.set( `client`, response[`data`][`token`])           
+                Cookies.set( `restaurant_token`, response[`data`][`token`])           
                 Cookies.set(`restaurant_id`, response[`data`][`restaurantId`])
-                //set Cookies with a value of response from axios POST method
-                // Cookies.set( `token`, this.token )
-                // changing page once successful
-                // this.$router.push( `/gamePage` )
+                this.$router.push(`/partner-home`) 
             } ).catch( ( error ) =>{
                 error;
                 // if not successful displaying a error mssage
