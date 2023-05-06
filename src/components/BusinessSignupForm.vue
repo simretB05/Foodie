@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="signup-card">
         <label for="email">Your Bussiness profile Image</label>
         <input type="text" v-model=" banner_url" placeholder="enter your picture"> 
         <label for="email">Your Bussiness Banner Image</label>
@@ -85,7 +85,60 @@ export default {
 </script>
 
 <style scoped>
-img{
-    width:100px
+signup-card {
+    display: grid;
+  justify-items: center;
+  width: 70%;
+  margin: 32px auto;
+  padding: 20px;
+  background-color: #fcfcfb;
+  border: 1px solid #7ed957;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: .9rem;
+  justify-self: start;
+  color: #7ed957;
+}
+
+input{
+width: 90%;
+padding: 10px;
+margin-bottom: 20px;
+border: none;
+border-radius: 5px;
+background-color: #f5f3f1;
+font-size: .8rem;
+justify-self: start;
+}
+
+
+button{
+display: block;
+  width: 40%;
+  padding: 10px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color:  #7ed957;;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 600px) {
+    .signup-card {
+        width: 50%;
+    }
+}
+@media only screen and (min-width: 900px) {
+    .signup-card {
+        width: 30%;
+    }
 }
 </style>

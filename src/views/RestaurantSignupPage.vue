@@ -2,6 +2,8 @@
     <div>
 <business-page-header></business-page-header>
 <main class="main">
+    <h2> Create a Partner Foodie Account </h2>
+
     <business-signup-form></business-signup-form>
 </main>
 <business-page-footer></business-page-footer>
@@ -24,5 +26,7 @@ import BusinessPageFooter from '@/components/BussinessPageFooter.vue'
 <style scoped>
 .main{
     min-height: 80vh;
+    display: grid;
+    place-items: center;
 }
 </style>

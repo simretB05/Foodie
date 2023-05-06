@@ -2,16 +2,13 @@
     <div>
         <page-header></page-header>
         <div class="main">
-
                 <div>
                     <h3>wellcome to Foodie</h3>
                 </div>
-
         </div>
         <page-footer></page-footer>
     </div>
 </template>
-
 <script>
 import axios from "axios";
 import Cookies from "vue-cookies"
@@ -26,12 +23,17 @@ import PageFooter from '@/components/PageFooter.vue'
         return {
             getClient_id: Cookies.get(`client_id`),
             userData:undefined,
-            userDataArry:[]
+            userDataArry: [],
+        
         }
     },
+    methods: {
+        getClientData(){
+           
+        },
+    },
     mounted(){
-            axios.request( {
-                // Url to send the post Method
+        axios.request( {
                 url: `https://foodie.bymoen.codes/api/client`,
                 headers: {
                     'x-api-key': `qUikCEg0vdshWKhbZQKL`
@@ -40,15 +42,17 @@ import PageFooter from '@/components/PageFooter.vue'
                     client_id: this.getClient_id,
                 }
             } ).then( ( response ) =>{
-                Cookies.set( `client_info`, response[`data`][0])
-                let  clientInfo_json= Cookies.get(`client_info`)
-                this.userData = clientInfo_json
-                this.userDataArry.push( this.userData )
+                Cookies.set( `client_info`, response[`data`][0] )
+                let clientInfo_json = Cookies.get( `client_info` )
+                 let userInfo = clientInfo_json
+                console.log(userInfo)
+                this.userDataArry.push( userInfo )
+                console.log(this.userDataArry)
                 this.$root.$emit( `userData`, this.userDataArry )
-            } ).catch( ( error ) =>{
+            } ).catch( ( error ) =>
+            {
                 error;
-                // this.errorMessage = "Invalid input! Please try again."
-            } ) 
+            } )
     },
     }
 </script>

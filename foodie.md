@@ -3,7 +3,7 @@
 ## Introduction
 
 Welcome to your second large project! This is going to be a fun one that will extend your knowledge of all things front-end.  
-Here you will find the documentation for each available API endpoint for you to work with.
+Here are you will find the documentation for each available API endpoint for you to work with.
 
 ## `Important`
 
@@ -483,7 +483,11 @@ Note that the token is sent as a header.
 },
 ```
 
-**No Data Returned**
+**Data Returned**
+
+```
+Number representing the menu_item_id just created
+```
 
 <br>
 <br>

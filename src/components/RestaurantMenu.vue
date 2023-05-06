@@ -1,5 +1,6 @@
 <template>
     <main class="main" >
+      <div class="main_card">
         <div class="menu_container">
         <div class="menu_card" v-for="(menu,i) in menuArry" :key="i">
           <div class="menu_img_card">           
@@ -9,10 +10,11 @@
            <h3 class="menu_name">{{menu[`name`]}}</h3> 
            <p class="menu_description">{{menu[`description`]}}</p>
            <p class="menu_price">{{menu[`price`]}}$CAD</p>
-           <button class="addto_order">Add to Orders</button>
+           <button @click="addtoOrders" :menu_item="menu[`id`]" class="addto_order">Order</button>
           </div>  
         </div>
     </div>
+  </div>
     </main>
 </template>
 <script>
@@ -21,29 +23,57 @@ import Cookies from "vue-cookies"
     export default {
         data() {
             return {
-                restaurant_id: undefined,
-                menuArry:[]
+              restaurantId: undefined,
+              menuArry: [],
+              token: Cookies.get( `token` ),
+              menu_items:[]
+              
             }
     },
     methods: {
-        getId(idData){
+      getId( restaurant_id ){
             axios.request( {
                 url: `https://foodie.bymoen.codes/api/menu`,
                 headers: {
                     'x-api-key': `qUikCEg0vdshWKhbZQKL`,
                 },
                 params: {
-                    restaurant_id:idData
+                  restaurant_id: restaurant_id
                 }
             } ).then( ( response ) => { 
-                this.menuArry = response[`data`]
+              this.menuArry = response[`data`]
+
             } ).catch( ( error ) =>{
                 error;
             } ) 
-        },
+      },
+      addtoOrders( details ){
+        let menu_item = details[`target`].getAttribute( `menu_item` )
+        this.menu_items.push( menu_item )
+                 console.log(this.menu_items)
+        axios.request( {
+                url: `https://foodie.bymoen.codes/api/client-order`,
+                headers: {
+                  'x-api-key': `qUikCEg0vdshWKhbZQKL`,
+                    token:this.token
+            },
+                method: `POST`,
+                data: {
+                  menu_items:this.menu_items,
+                  restaurant_id:this.restaurantId
+                }
+            } ).then( ( response) => {
+             response
+            } ).catch( ( error ) =>
+            {
+                error;
+               
+            } )
+      }
     },
     mounted(){
-        let restaurant_id = Cookies.get(`restaurant_id` )
+      let restaurant_id = Cookies.get( `restaurant_id` )
+        this.restaurantId=restaurant_id
              this.getId(restaurant_id)  
     },   
     }
@@ -51,6 +81,12 @@ import Cookies from "vue-cookies"
 <style scoped>
 .main{
     min-height: 30vh;
+    margin: 32px;
+}
+.main_card{
+  display: grid;
+  place-items: center;
+  width: 100%;
 }
 .menu_container {
   display: grid;
@@ -58,6 +94,7 @@ import Cookies from "vue-cookies"
   width: 100%;
   justify-content: center;
   gap: 20px;
+  margin: 50px;
 }
  .menu_card {
   width: 80%;
@@ -66,15 +103,18 @@ import Cookies from "vue-cookies"
   place-items: center;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  /* grid-template-columns:repeat(auto-fit, minmax(50px, 1fr)); */
 }
 .menu_img_card{
 width: 100%;
+min-height: 100%;
+align-self: start;
+
 }
 .menu_image {
   width: 100%;
   height: auto;
-  border-radius: 10px 10px 0 0;
+  border-radius: 10px 0 0 10px;
+  align-self: start;
 }
 .menu_details {
   padding: 14px;
@@ -108,9 +148,9 @@ width: 100%;
   font-weight: bold;
   text-align: center;
   background-color:#7ed957;;
-  color: #fff;
+  color: black;
   border: none;
-  border-radius: 0 0 10px 10px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -133,9 +173,20 @@ width: 100%;
 }
 }
 @media only screen and (min-width: 900px) {
+  .main_card{
+  grid-template-columns:repeat(auto-fit, minmax(50px, 1fr));
+
+ }
   .menu_card {
   grid-template-columns:repeat(auto-fit, minmax(50px, 1fr));
+  width: 100%;
 }
+.menu_container{
+  width: 60%;
+  grid-template-columns:repeat(auto-fit, minmax(500px, 1fr));
+
+} 
+
 }
 
 </style>

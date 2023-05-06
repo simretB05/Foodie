@@ -6,7 +6,7 @@
         <div   @click="primaryToggleHandler"   v-if="!getClient_id" class="nav_user_menu_card">    
             <img v-if="!getClient_id" class="nav_user_menu_img" src="/images/icons/menu.svg" alt=" menu-icon">
         </div>
-        <nav class="desktop_nav"  v-if="!getClient_id">
+        <nav class="desktop_nav"  v-if="!getClient_id">     
             <ul class="nav_desktop_list">
                 <router-link to="/user-login" class="nav-link" >
                     <li class="desktoplist_item">
@@ -31,7 +31,13 @@
             <h3> Welcome {{ first_name }}!</h3>
         </div>
         <nav v-if="is_primaryNavOpen" class="primary-nav">
+            
             <div class="primary_nav_card">
+                <div>
+                        <div v-if="is_primaryNavOpen"  @click="primaryToggleHandler" class="nav_user_menu_card" > 
+                            <img class="nav_user_menu_img" src="/images/icons/cross.svg" alt=" login avatar">
+                        </div>
+                </div>
                 <h2 class="nav_title">Welcome!</h2>
                 <ul  class="main_nav">
                     <li class="nav_user_login_card">
@@ -48,8 +54,14 @@
             </div>
         </nav>
         <nav  v-if="is_scondaryNavOpen" class="secondary-nav">
-            <div  class="secondary_nav_card"  >
+                <div  class="secondary_nav_card"  >
+                    <div>
+                        <div @click="secondaryToggleHandler" class="nav_user_menu_card" > 
+                        <img class="nav_user_menu_img" src="/images/icons/cross.svg" alt=" login avatar">
+                    </div>
+                </div>
                 <h3 class="secondery-title">Welcome {{ first_name }}!</h3>
+
                 <ul class="secondery_nav_list">
                     <router-link   class="nav-link" to="/client-profile-page">
                         <li class="secondery_nav_item">
@@ -108,52 +120,61 @@
     // import axios from "axios";
     import Cookies from "vue-cookies"
 export default {
+  
     data() {
         return {
-            // username:undefined,
+            username:undefined,
             getClient_id: Cookies.get( `client_id` ),
-            clientInfo_json:undefined,
             is_primaryNavOpen: false,
             is_scondaryNavOpen: false,
-            first_name: undefined,
-            userArray:[]
+            userArray: [],
+           numberOfOrders: [],
+            order_json: Cookies.get( `menu_id` ),
+            first_name: undefined
+            
         }
     },
     methods: {
-        primaryToggleHandler(){
+        primaryToggleHandler()
+        {
             this.is_primaryNavOpen = !this.is_primaryNavOpen
-           
-            
         },
-        secondaryToggleHandler(){
+        secondaryToggleHandler()
+        {
             this.is_scondaryNavOpen = !this.is_scondaryNavOpen
-         
         },
-        logoutHandler(){
+        logoutHandler()
+        {
             Cookies.remove( `client_id` )
             Cookies.remove( `client_info` )
             Cookies.remove( `token` )
             this.$router.push( `/` )
             location.reload();
+
         },
-        getClientInfo( userData ){
-            if ( this.first_name !== undefined ) {
-                this.first_name=this,this.first_name
+        getClientInfo( userData){
+            let clientInfo_json = Cookies.get( `client_info` )
+            console.log( clientInfo_json )
+            if ( this.first_name === undefined ){
+                this.first_name = clientInfo_json[`first_name`]
+                console.log( `this is ${ this.first_name }` )
+            
             } else{
-                this.first_name = userData[`first_name`]
-                this.$root.$on( `userData`, this.getClientInfo );
+                for ( let i = 0; i < userData.length; i++ ){
+                    this.first_name = userData[i][`first_name`]
+                    console.log( userData )
+                }
             }
-            location.reload();
+        },
+        countOrders(){
+            this.numberOfOrders.push( this.clientInfo_json )
+            console.log( this.numberOfOrders )
         }
     },
-
     mounted(){
-        if ( this.first_name === undefined ){
-            this.clientInfo_json= Cookies.get(`client_info`)
-               this.first_name=this.clientInfo_json[`first_name`]
-            } else{
-                this.$root.$on( `userData`, this.getClientInfo );
-            }
+        this.$root.$on( `userData`, this.getClientInfo );
+        this.countOrders()
+            this.getClientInfo()
           
     }
     }
@@ -195,10 +216,10 @@ justify-self: end;
     display:grid;
     place-items:center;
     position: absolute; 
-    top: 100%;
+    top: 0;
 	right: 0;
     width: 68%;
-    height: 79.9vh;
+    height: 93.6vh;
     background-color:#f1f2f4;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);	
 }
@@ -291,6 +312,12 @@ display: none;
     }
 }
 @media only screen and (min-width: 900px) {
+    .logo_holder{
+        width: 351px;
+    }
+    .logo{
+        width: 60px;
+    }
     .primary-nav{
      display: none;
    
@@ -372,7 +399,7 @@ place-items:center;
 list-style: none;
 display: grid;
 place-items:center;
-width: 60%;
+width: 70%;
 grid-template-columns:repeat(auto-fit, minmax(11px, 1fr));
 justify-self: end;
 }

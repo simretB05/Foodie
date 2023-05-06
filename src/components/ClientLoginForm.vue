@@ -75,7 +75,7 @@ label {
   color: #7ed957;
 }
 input{
-  width: 90%;
+    width: 90%;
   padding: 10px;
   margin-bottom: 20px;
   border: none;
@@ -87,7 +87,7 @@ input{
 
 
 button {
-  display: block;
+    display: block;
   width: 30%;
   padding: 10px;
   margin-top: 20px;

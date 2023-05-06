@@ -1,15 +1,28 @@
 <template>
     <div>
- this is selected resturants page
+        <business-page-header></business-page-header>
+        <main class="main">
+            <div><h4>Name of resturant</h4></div>
+          <restaurant-menu></restaurant-menu>
+        </main>
+        <bussiness-page-footer></bussiness-page-footer>
     </div>
 </template>
 
 <script>
 
+import RestaurantMenu from '@/components/RestaurantMenu.vue';
+import BusinessPageHeader from '@/components/BusinessPageHeader.vue';
+import BussinessPageFooter from '@/components/BussinessPageFooter.vue';
     export default {
-    data() {
-            return {
+    components: {
             
+            RestaurantMenu,
+            BusinessPageHeader,
+        BussinessPageFooter
+    },
+    data() {
+        return {
         }
     },
     methods: {
@@ -18,11 +31,11 @@
     mounted(){
         
     }
-        
-}
-    
+    }
 </script>
 
 <style scoped>
-
+.main{
+    min-height: 80vh;
+}
 </style>

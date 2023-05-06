@@ -84,6 +84,7 @@ const routes = [
                 path: '/single-restaurant-home',
                 component:SingleRestaurantHomePage ,
               },
+              
     
     
 ]

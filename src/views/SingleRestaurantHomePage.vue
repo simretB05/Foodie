@@ -35,5 +35,7 @@ import PageFooter from '@/components/PageFooter.vue';
 <style scoped>
 .main{
     min-height: 80vh;
+    background-color: #f5f3f1;
+
 }
 </style>
