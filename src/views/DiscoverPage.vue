@@ -46,15 +46,12 @@ import PageFooter from '@/components/Client/PageFooter.vue'
         selectRestaurant(details){
             this.getRestaurant_id = details[`target`].getAttribute(`restaurant_id`)
             Cookies.set( `restaurant_id`, this.getRestaurant_id )
-            console.log(typeof(this.getRestaurant_id))
             let rest_value = this.getrestaurantsdata 
-            console.log(rest_value)
+            
             for ( let i = 0; i < rest_value.length; i++ ){
                 if (String(rest_value[i][`restaurant_id`] )=== this.getRestaurant_id){
                     this.rest_json =rest_value[i]
-                    Cookies.set( `resData`, this.rest_json)
-                }else{
-                    console.log(`itsnot a match`)
+                    Cookies.set( `restData`, this.rest_json)
                 }
             }
             this.$router.push( `single-restaurant-home` )

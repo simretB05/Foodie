@@ -1,11 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import MainHomePage from '@/views/MainHomePage.vue'
-// import ClientHomePage from '@/views/ClientHomePage.vue'
+import ClientsMainHomePage from '@/views/ClientsMainHomePage.vue'
 import ClientSignupForm from '@/views/ClientSignupForm'
 import ClientLoginPage from '@/views/ClientLoginPage'
-// import RestaurantHomePage from '@/views/RestaurantHomePage.vue'
-// import ClientLoginPage from '@/views/ClientLoginPage.vue'
 import ClientProfilePage from '@/views/ClientProfilePage.vue'
 import DiscoverPage from '@/views/DiscoverPage.vue'
 import OrdersPage from '@/views/OrdersPage.vue'
@@ -27,7 +24,7 @@ Vue.use(VueRouter)
 const routes = [
                 {
                   path: '/',
-                  component:MainHomePage ,
+                  component:ClientsMainHomePage ,
                 },
                 {
                   path: '/user-login',

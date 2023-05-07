@@ -44,8 +44,7 @@ import PageFooter from '@/components/Client/PageFooter.vue'
             } ).then( ( response ) =>{
                 Cookies.set( `client_info`, response[`data`][0] )
                 let clientInfo_json = Cookies.get( `client_info` )
-                 let userInfo = clientInfo_json
-                this.userDataArry.push( userInfo )
+                this.userDataArry.push( clientInfo_json )
                 this.$root.$emit( `userData`, this.userDataArry )
             } ).catch( ( error ) =>
             {

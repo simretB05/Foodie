@@ -42,7 +42,7 @@ import Cookies from "vue-cookies"
                 // on a response, assign a variable to the value of a response  
             } ).then( ( response ) =>{
                 Cookies.set( `restaurant_token`, response[`data`][`token`])           
-                Cookies.set(`restaurant_id`, response[`data`][`restaurantId`])
+                Cookies.set(`restaurant_id`, response[`data`][`restaurant_id`])
                 this.$router.push(`/partner-home`) 
             } ).catch( ( error ) =>{
                 error;

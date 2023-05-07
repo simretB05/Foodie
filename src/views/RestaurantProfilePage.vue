@@ -1,7 +1,7 @@
 <template>
     <div>
         <business-page-header></business-page-header>
-        <main class="main">
+        <!-- <main class="main">
             <section class="main">
                 <div class="info__card_holder"  >
                     <h1>Account Settings</h1>
@@ -37,25 +37,25 @@
                     <input   v-model="city" type="text" required placeholder="City">
                     <label  for="password">Password</label>
                     <input  v-model="password" type="password" required placeholder="Password">
-                    <button @click="getResponseToken" type="submit">submit</button>
+                    <button  type="submit">submit</button>
                 </div>
                 <div class="remove_user">
                     <label  for="first name">Enter Your password</label>
                     <input  v-model="pass_value" type="password" required placeholder="enter your User Password" aria-required>
-                    <button @click="removeUserProfile" type="submit"> Remove Profile</button>
+                    <button  type="submit"> Remove Profile</button>
                 </div>
-                <h2>{{ message }}</h2>
-                <h2>{{ profileRemovemessage }}</h2>
+            <h2>{{ message }}</h2>
+                <h2>{{ profileRemovemessage }}</h2> 
 
             </section>
-        </main>
+        </main>  -->
         <bussiness-page-footer></bussiness-page-footer>
     </div>
 </template>
 
 <script>
 // import Cookies from "vue-cookies"
-import axios from "axios";
+// import axios from "axios";
 import BusinessPageHeader from '@/components/Restaurant/BusinessPageHeader.vue';
 import BussinessPageFooter from '@/components/Restaurant/BussinessPageFooter.vue';
     export default {
@@ -68,29 +68,29 @@ import BussinessPageFooter from '@/components/Restaurant/BussinessPageFooter.vue
             }
     },
     methods: {
-        editePartnersInfo(){
-            axios.request( {
-                // Url to send the post Method
-                url: `https://foodie.bymoen.codes/api/client`,
-                headers: {
-                    'x-api-key': `qUikCEg0vdshWKhbZQKL`,
-                    token: this.getToken
-                },
-                method: `PATCH`,
-                data: {
-                    // data values required to send a PATCH request
-                }
-                // on a response, assign a variable to the value of a response  
-            } ).then( () =>{
+        // editePartnersInfo(){
+            // axios.request( {
+            //     // Url to send the post Method
+            //     url: `https://foodie.bymoen.codes/api/client`,
+            //     headers: {
+            //         'x-api-key': `qUikCEg0vdshWKhbZQKL`,
+            //         token: this.getToken
+            //     },
+            //     method: `PATCH`,
+            //     data: {
+            //         // data values required to send a PATCH request
+            //     }
+            //     // on a response, assign a variable to the value of a response  
+            // } ).then( () =>{
                
             
-            } ).catch( ( error ) =>
-            {
-                error;
-                this.errorMessage = "Invalid input! Please try again."
-            } )
+            // } ).catch( ( error ) =>
+            // {
+            //     error;
+            //     this.errorMessage = "Invalid input! Please try again."
+            // } )
             
-            }
+            // }
         },
     }
 </script>

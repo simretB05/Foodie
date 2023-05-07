@@ -1,9 +1,9 @@
 <template>
     <main class="main" >
       <div class="rest_info_card">
-          <h1 class="rest_name">{{restInfo[`name`]}} Restaurant Menu </h1>
-          <p class="rest_address"> Address:{{restInfo[`address`] }}</p>
-          <p class="rest_address">Phone-number:{{restInfo[`phone_number`]}}</p>
+          <h1 class="rest_name">{{ restaurant_name}} Restaurant Menu </h1>
+          <p class="rest_address"> Address:{{restaurant_address }}</p>
+          <p class="rest_address">Phone-number:{{restaurant_phone}}</p>
       </div>
       <div class="main_card">
         <div class="menu_container">
@@ -32,7 +32,10 @@ import Cookies from "vue-cookies"
               menuArry: [],
               token: Cookies.get( `token` ),
               menu_items: [],
-              restInfo:undefined,
+              restInfo: undefined,
+              restaurant_address: undefined,
+              restaurant_name: undefined,
+              restaurant_phone:undefined
             }
     },
     methods: {
@@ -75,7 +78,10 @@ import Cookies from "vue-cookies"
     },
     mounted(){
       let restaurant_id = Cookies.get( `restaurant_id` )
-      this.restInfo = Cookies.get( `resData` )
+      this.restInfo = Cookies.get( `restData` )
+      this.restaurant_name = this.restInfo[`name`]
+      this.restaurant_address = this.restInfo[`address`]
+      this.restaurant_phone = this.restInfo[`phone_number`]
         this.restaurantId=restaurant_id
              this.getId(restaurant_id)  
     },   

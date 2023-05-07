@@ -28,7 +28,7 @@
             <div @click="secondaryToggleHandler" class="nav_user_menu_card" > 
                 <img class="nav_user_menu_img" src="/images/icons/menu.svg" alt=" login avatar">
             </div>
-            <h3> Welcome {{ first_name }}!</h3>
+            <h3> Welcome {{ name }}!</h3>
         </div>
         <nav v-if="is_primaryNavOpen" class="primary-nav">
             <div class="primary_nav_card">
@@ -59,7 +59,7 @@
                         <img class="nav_user_menu_img" src="/images/icons/cross.svg" alt=" login avatar">
                     </div>
                 </div>
-                <h3 class="secondery-title">Welcome Partner {{ first_name }}!</h3>
+                <h3 class="secondery-title">Welcome Partner {{ name }}!</h3>
                 <ul class="secondery_nav_list">
                     <router-link   class="nav-link" to="/partner-profile">
                         <li class="secondery_nav_item">
@@ -91,7 +91,7 @@
             </div>
         </nav>
         <nav  v-if="getRest_id || is_scondaryNavOpen" class="secondary-nav-desktop">
-            <h3 class="seconderydesktop-title">Welcome Partner  {{ first_name }}!</h3>
+            <h3 class="seconderydesktop-title">Welcome Partner at {{ name }}!</h3>
             <div  class="secondary_desktopnav_card"  >
                 <ul class="seconderydesktop_nav_list">
                     <router-link   class="nav-link" to="/partner-profile">
@@ -133,22 +133,19 @@ export default {
         return {
             // username:undefined,
             getRest_id: Cookies.get(`restaurant_id` ),
-            clientInfo_json:undefined,
+            restInfo_json:undefined,
             is_primaryNavOpen: false,
             is_scondaryNavOpen: false,
-            rest_name: undefined,
+            name: undefined,
             userArray:[]
         }
     },
     methods: {
         primaryToggleHandler(){
             this.is_primaryNavOpen = !this.is_primaryNavOpen
-           
-            
         },
         secondaryToggleHandler(){
             this.is_scondaryNavOpen = !this.is_scondaryNavOpen
-         
         },
         logoutHandler(){
             Cookies.remove( `client_id` )
@@ -156,17 +153,13 @@ export default {
             Cookies.remove( `token` )
             this.$router.push(`/`)
         },
-        getRestaurantInfo( userData ){
-            let clientInfo_json = Cookies.get( `_info` )
-            console.log( clientInfo_json )
-            if ( this.rest_name === undefined ){
-                this.rest_name = clientInfo_json[`name`]
-                console.log( `this is ${ this.rest_name }` )
-            
+        getRestaurantInfo( restData ){
+            let restInfo_json = Cookies.get( `rest_info` )
+            if ( this.name === undefined ){
+                this.name = restInfo_json[`name`]            
             } else{
-                for ( let i = 0; i < userData.length; i++ ){
-                    this.rest_name = userData[i][`first_name`]
-                    console.log( userData )
+                for ( let i = 0; i < restData.length; i++ ){
+                    this.rest_name = restData[i][`name`]
                 }
             }
         }
@@ -174,7 +167,7 @@ export default {
 
     mounted(){
        
-        this.$root.$on( `userData`, this.  getRestaurantInfo );
+        this.$root.$on( `restData`, this.  getRestaurantInfo );
             this.  getRestaurantInfo()
     }
     }

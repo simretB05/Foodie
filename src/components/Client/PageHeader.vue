@@ -166,15 +166,12 @@ export default {
         },
         getClientInfo( userData){
             let clientInfo_json = Cookies.get( `client_info` )
-            console.log( clientInfo_json )
             if ( this.first_name === undefined ){
                 this.first_name = clientInfo_json[`first_name`]
-                console.log( `this is ${ this.first_name }` )
             
             } else{
                 for ( let i = 0; i < userData.length; i++ ){
                     this.first_name = userData[i][`first_name`]
-                    console.log( userData )
                 }
             }
         },
@@ -185,7 +182,6 @@ export default {
     },
     mounted(){
         this.$root.$on( `userData`, this.getClientInfo );
-        this.countOrders()
             this.getClientInfo()
     }
     }
