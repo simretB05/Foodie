@@ -15,6 +15,8 @@
               <h3 class="menu_name">{{menu[`name`]}}</h3> 
               <p class="menu_description">{{menu[`description`]}}</p>
               <p class="menu_price">{{menu[`price`]}}$CAD</p>
+              <label class="order_label" for="number"> Number Of Order</label>
+                    <input type="number" class="order_number" placeholder="number" min="1" max="100">
                 <button v-if="token" @click="addtoCart" :menu_id="menu[`id`]" class="addto_cart"> Add To Cart</button>
               </div>  
         </div>
@@ -153,6 +155,20 @@ align-self: start;
 .menu_price {
   font-size: 18px;
   font-weight: bold;
+  margin-bottom: 10px;
+}
+.order_label{
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 0.8rem; 
+  padding:10px ;
+}
+
+.order_number {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 60px;
   margin-bottom: 10px;
 }
 .addto_cart {

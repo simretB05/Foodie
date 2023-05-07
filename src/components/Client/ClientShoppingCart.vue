@@ -6,12 +6,11 @@
             <div >
                 <h2 class="order_name">{{order[`name`]}}</h2>
                     <p class="order_price"> Price {{order[`price`] }} $CAD</p>
-                    <p class="order_id"> your Order Number {{ order[`order_id`] }}</p>
-                <div class="confirm-card">
+                    <div class="confirm-card">
                     <p class="order_confirm">{{order[`is_complete`] }}</p>
                     <p class="orders_confirm">{{order[`is_confirmed`]}}</p>
                 </div>
-                <button  class="select_button" >Order</button>
+                <button  @click="sendOrder" :order_id="order[`id`]" class="select_button"  >Order</button>
             </div>
         </div>
     </div>
@@ -19,13 +18,16 @@
 </template>
 
 <script>
-// import axios from "axios";
+import axios from "axios";
 import Cookies from "vue-cookies"
     export default {
         data() {
             return {
-                order:Cookies.get(`orderData`),
-                orderArray:[]
+                order: Cookies.get( `orderData` ),
+                token: Cookies.get(`token`),
+                restaurantId:Cookies.get( `restaurant_id` ),
+                orderArray: [],
+                orderIDArray:[]
             }
     },
     mounted(){
@@ -33,8 +35,29 @@ import Cookies from "vue-cookies"
     },
     methods: {
         getOrderItems() {
-            this.orderArray=this.order
-            
+            this.orderArray = this.order
+
+
+        },
+        sendOrder(details){
+             let order_id = details[`target`].getAttribute( `order_id` )
+            this.orderIDArray.push(order_id)
+            axios.request( {
+                url: `https://foodie.bymoen.codes/api/client-order`,
+                headers: {
+                  'x-api-key': `qUikCEg0vdshWKhbZQKL`,
+                    token:this.token
+            },
+                method: `POST`,
+                data: {
+                  menu_items:this.orderIDArray,
+                  restaurant_id:this.restaurantId
+                }
+            } ).then( ( response) => {
+             response
+            } ).catch( ( error ) =>{
+                error;
+            } )
         }
             
         }
@@ -46,6 +69,9 @@ import Cookies from "vue-cookies"
     display: grid;
     place-items: center;
    
+}
+.orders_title{
+    margin-top:50px;
 }
 .orders_card {
     display: grid;
@@ -109,7 +135,7 @@ box-shadow: none;
 }
     @media only screen and (min-width: 900px) {
     .orders_card {
-        width: 60%;
+        width: 30%;
     }
 }
 </style>
