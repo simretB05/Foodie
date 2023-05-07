@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import BusinessPageHeader from '@/components/BusinessPageHeader.vue';
+    import BusinessPageHeader from '@/components/Restaurant/BusinessPageHeader.vue';
     export default {
     components: {
         BusinessPageHeader

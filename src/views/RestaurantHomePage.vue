@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import BusinessSignupForm from '@/components/BusinessSignupForm.vue'
-import BusinessLoginForm from '@/components/BusinessLoginForm.vue'
+import BusinessSignupForm from '@/components/Restaurant/BusinessSignupForm.vue'
+import BusinessLoginForm from '@/components/Restaurant/BusinessLoginForm.vue'
 export default {
     components: {
         BusinessLoginForm,

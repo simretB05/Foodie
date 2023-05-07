@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import BusinessSignupForm from '@/components/BusinessSignupForm.vue'
-import BusinessPageHeader from '@/components/BusinessPageHeader.vue'
-import BusinessPageFooter from '@/components/BussinessPageFooter.vue'
+import BusinessSignupForm from '@/components/Restaurant/BusinessSignupForm.vue'
+import BusinessPageHeader from '@/components/Restaurant/BusinessPageHeader.vue'
+import BusinessPageFooter from '@/components/Restaurant/BussinessPageFooter.vue'
     export default {
     components: {
             BusinessSignupForm,

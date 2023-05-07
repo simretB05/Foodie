@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import BusinessPageHeader from '@/components/BusinessPageHeader.vue';
-import BussinessPageFooter from '@/components/BussinessPageFooter.vue';
+import BusinessPageHeader from '@/components/Restaurant/BusinessPageHeader.vue';
+import BussinessPageFooter from '@/components/Restaurant/BussinessPageFooter.vue';
 import PartnerSideOrders from '@/components/Restaurant/RestaurantSideOrders.vue'
     export default {
     components: {

@@ -34,12 +34,12 @@
     </div>
 </template>
 <script>
-import ClientSignupForm from "@/components/ClientSignupForm.vue";
+import ClientSignupForm from "@/components/Client/ClientSignupForm.vue";
 import Cookies from "vue-cookies"
 import axios from "axios";
 
-  import PageHeader from '@/components/PageHeader.vue';
-  import PageFooter from "@/components/PageFooter.vue";
+  import PageHeader from '@/components/Client/PageHeader.vue';
+  import PageFooter from "@/components/Client/PageFooter.vue";
 export default {
     components: {
         PageHeader,

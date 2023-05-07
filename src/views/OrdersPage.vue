@@ -8,9 +8,9 @@
     </div>
 </template>
 <script>
-     import PageHeader from '@/components/PageHeader.vue'
-     import PageFooter from '@/components/PageFooter.vue'
-     import  ClientOrders from '@/components/ClientOrders.vue'
+     import PageHeader from '@/components/Client/PageHeader.vue'
+     import PageFooter from '@/components/Client/PageFooter.vue'
+     import  ClientOrders from '@/components/Client/ClientOrders.vue'
     export default {
     components: {
             PageHeader,

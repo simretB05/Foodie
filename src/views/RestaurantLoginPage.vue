@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import BusinessLoginForm from '@/components/BusinessLoginForm.vue'
-import BusinessPageHeader from '@/components/BusinessPageHeader.vue'
-import BusinessPageFooter from '@/components/BussinessPageFooter.vue'
+import BusinessLoginForm from '@/components/Restaurant/BusinessLoginForm.vue'
+import BusinessPageHeader from '@/components/Restaurant/BusinessPageHeader.vue'
+import BusinessPageFooter from '@/components/Restaurant/BussinessPageFooter.vue'
     export default {
     components: {
         BusinessLoginForm ,

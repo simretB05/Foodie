@@ -12,8 +12,8 @@
 <script>
 import axios from "axios";
 import Cookies from "vue-cookies"
-import PageHeader from '@/components/PageHeader.vue';
-import PageFooter from '@/components/PageFooter.vue'
+import PageHeader from '@/components/Client/PageHeader.vue';
+import PageFooter from '@/components/Client/PageFooter.vue'
     export default {
     components: {
             PageHeader,
@@ -45,9 +45,7 @@ import PageFooter from '@/components/PageFooter.vue'
                 Cookies.set( `client_info`, response[`data`][0] )
                 let clientInfo_json = Cookies.get( `client_info` )
                  let userInfo = clientInfo_json
-                console.log(userInfo)
                 this.userDataArry.push( userInfo )
-                console.log(this.userDataArry)
                 this.$root.$emit( `userData`, this.userDataArry )
             } ).catch( ( error ) =>
             {

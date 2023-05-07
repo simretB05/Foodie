@@ -27,8 +27,8 @@
 <script>
 import axios from "axios";
 import Cookies from "vue-cookies"
-import PageHeader from '@/components/PageHeader.vue'
-import PageFooter from '@/components/PageFooter.vue'
+import PageHeader from '@/components/Client/PageHeader.vue'
+import PageFooter from '@/components/Client/PageFooter.vue'
     export default {
     components: {
             PageHeader,

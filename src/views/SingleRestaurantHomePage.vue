@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import PageHeader from '@/components/PageHeader.vue';
-import RestaurantMenu from '@/components/RestaurantMenu.vue';
-import PageFooter from '@/components/PageFooter.vue';
+import PageHeader from '@/components/Client/PageHeader.vue';
+import RestaurantMenu from '@/components/Restaurant/RestaurantMenu.vue';
+import PageFooter from '@/components/Client/PageFooter.vue';
     export default {
     components: {
             PageHeader,

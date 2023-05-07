@@ -11,9 +11,9 @@
 
 <script>
 
-import RestaurantMenu from '@/components/RestaurantMenu.vue';
-import BusinessPageHeader from '@/components/BusinessPageHeader.vue';
-import BussinessPageFooter from '@/components/BussinessPageFooter.vue';
+import RestaurantMenu from '@/components/Restaurant/RestaurantMenu.vue';
+import BusinessPageHeader from '@/components/Restaurant/BusinessPageHeader.vue';
+import BussinessPageFooter from '@/components/Restaurant/BussinessPageFooter.vue';
     export default {
     components: {
             

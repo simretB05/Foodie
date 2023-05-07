@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import BusinessPageHeader from '@/components/BusinessPageHeader.vue';
-import BussinessPageFooter from '@/components/BussinessPageFooter.vue';
-import MenuInputPage from '@/components/MenuInputPage.vue';
+import BusinessPageHeader from '@/components/Restaurant/BusinessPageHeader.vue';
+import BussinessPageFooter from '@/components/Restaurant/BussinessPageFooter.vue';
+import MenuInputPage from '@/components/Restaurant/RestaurantMenuInputPage.vue';
     export default {
     components: {
             MenuInputPage,

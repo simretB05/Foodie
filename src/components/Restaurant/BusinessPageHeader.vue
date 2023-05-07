@@ -136,7 +136,7 @@ export default {
             clientInfo_json:undefined,
             is_primaryNavOpen: false,
             is_scondaryNavOpen: false,
-            first_name: undefined,
+            rest_name: undefined,
             userArray:[]
         }
     },
@@ -156,25 +156,26 @@ export default {
             Cookies.remove( `token` )
             this.$router.push(`/`)
         },
-        getClientInfo( userData ){
-            if ( this.first_name !== undefined ) {
-                this.first_name=this,this.first_name
+        getRestaurantInfo( userData ){
+            let clientInfo_json = Cookies.get( `_info` )
+            console.log( clientInfo_json )
+            if ( this.rest_name === undefined ){
+                this.rest_name = clientInfo_json[`name`]
+                console.log( `this is ${ this.rest_name }` )
+            
             } else{
-                this.first_name = userData[`first_name`]
-                this.$root.$on( `userData`, this.getClientInfo );
+                for ( let i = 0; i < userData.length; i++ ){
+                    this.rest_name = userData[i][`first_name`]
+                    console.log( userData )
+                }
             }
-            location.reload();
         }
     },
 
     mounted(){
-        if ( this.first_name !== undefined ) {
-                this.first_name=this,this.first_name
-            } else{
-                this.clientInfo_json= Cookies.get(`client_info`)
-               this.first_name=this.clientInfo_json[`first_name`]
-            }
-          
+       
+        this.$root.$on( `userData`, this.  getRestaurantInfo );
+            this.  getRestaurantInfo()
     }
     }
 </script>
