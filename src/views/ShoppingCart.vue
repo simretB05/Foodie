@@ -3,7 +3,7 @@
         <page-header></page-header>
 
         <main class="main"> 
-            <p>Login Page oooo</p>
+            <client-shopping-cart></client-shopping-cart>
        </main>
        <page-footer></page-footer>
     </div>
@@ -12,11 +12,13 @@
 
 <script>
 import PageHeader from '@/components/Client/PageHeader.vue';
-    import PageFooter from '@/components/Client/PageFooter.vue'
+import PageFooter from '@/components/Client/PageFooter.vue'
+    import ClientShoppingCart from '@/components/Client/ClientShoppingCart.vue';
     export default {
     components: {
             PageHeader,
-            PageFooter
+            PageFooter,
+            ClientShoppingCart
 
         }
     }
@@ -25,5 +27,6 @@ import PageHeader from '@/components/Client/PageHeader.vue';
 <style scoped>
 .main{
     min-height: 80vh;
+    background-color:#f5f3f1 ;
 }
 </style>

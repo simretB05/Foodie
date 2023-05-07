@@ -45,9 +45,20 @@ export default {
     },
     methods: {
         selectRestaurant(details){
-            this.getRestaurant_id = details[`target`].getAttribute(`restaurant_id` )
-            Cookies.set(`restaurant_id`,this.getRestaurant_id)
-            this.$router.push(`single-partner-home`)
+            this.getRestaurant_id = details[`target`].getAttribute(`restaurant_id`)
+            Cookies.set( `singleRest_id`, this.getRestaurant_id )
+
+            let rest_value = this.responseData
+            
+            for ( let i = 0; i < rest_value.length; i++ ){
+                if (String(rest_value[i][`restaurant_id`] )=== this.getRestaurant_id){
+                    this.rest_json =rest_value[i]
+                    Cookies.set( `restData`, this.rest_json)
+                }
+            }
+            this.$router.push( `single-partner-home` )
+
+           
         },
         getRsturants(){
             axios.request( {

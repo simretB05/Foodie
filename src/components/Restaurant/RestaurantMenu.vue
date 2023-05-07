@@ -1,7 +1,7 @@
 <template>
     <main class="main" >
       <div class="rest_info_card">
-          <h1 class="rest_name">{{ restaurant_name}} Restaurant Menu </h1>
+          <h1 class="rest_name">{{restaurant_name}} Restaurant Menu </h1>
           <p class="rest_address"> Address:{{restaurant_address }}</p>
           <p class="rest_address">Phone-number:{{restaurant_phone}}</p>
       </div>
@@ -15,8 +15,8 @@
               <h3 class="menu_name">{{menu[`name`]}}</h3> 
               <p class="menu_description">{{menu[`description`]}}</p>
               <p class="menu_price">{{menu[`price`]}}$CAD</p>
-                <button @click="addtoOrders" :menu_item="menu[`id`]" class="addto_order"> Add To Orders</button>
-          </div>  
+                <button v-if="token" @click="addtoCart" :menu_id="menu[`id`]" class="addto_cart"> Add To Cart</button>
+              </div>  
         </div>
       </div>
   </div>
@@ -30,16 +30,20 @@ import Cookies from "vue-cookies"
             return {
               restaurantId: undefined,
               menuArry: [],
-              token: Cookies.get( `token` ),
-              menu_items: [],
+              token: Cookies.get(`token`),
+              rest_token:Cookies.get(`restaurant_token`),
               restInfo: undefined,
               restaurant_address: undefined,
               restaurant_name: undefined,
-              restaurant_phone:undefined
+              restaurant_phone: undefined,
+              orderArray:[]
             }
     },
     methods: {
-      getId( restaurant_id ){
+      getId( restaurant_id, singRest_id ){
+        if ( this.token === null ) {
+                restaurant_id=singRest_id
+              }
             axios.request( {
                 url: `https://foodie.bymoen.codes/api/menu`,
                 headers: {
@@ -55,35 +59,30 @@ import Cookies from "vue-cookies"
                 error;
             } ) 
       },
-      addtoOrders( details ){
-        let menu_item = details[`target`].getAttribute( `menu_item` )
-        this.menu_items.push( menu_item )
-        axios.request( {
-                url: `https://foodie.bymoen.codes/api/client-order`,
-                headers: {
-                  'x-api-key': `qUikCEg0vdshWKhbZQKL`,
-                    token:this.token
-            },
-                method: `POST`,
-                data: {
-                  menu_items:this.menu_items,
-                  restaurant_id:this.restaurantId
+      addtoCart( details ){
+        let menu_id = details[`target`].getAttribute( `menu_id` )
+        for ( let i = 0; i < this.menuArry.length; i++ ){
+          if ( String( this.menuArry[i][`id`] ) === menu_id ) {
+            this.orderArray.push( this.menuArry[i] )
+            console.log(this.orderArray)
+            Cookies.set( `orderData`, this.orderArray)
+                  
+                    break
                 }
-            } ).then( ( response) => {
-             response
-            } ).catch( ( error ) =>{
-                error;
-            } )
+            }
+       
       }
     },
-    mounted(){
+  mounted(){
+      
       let restaurant_id = Cookies.get( `restaurant_id` )
+      let singRest_id= Cookies.get(`singleRest_id`)
       this.restInfo = Cookies.get( `restData` )
       this.restaurant_name = this.restInfo[`name`]
       this.restaurant_address = this.restInfo[`address`]
       this.restaurant_phone = this.restInfo[`phone_number`]
         this.restaurantId=restaurant_id
-             this.getId(restaurant_id)  
+             this.getId(restaurant_id,singRest_id)  
     },   
     }
 </script>
@@ -156,7 +155,7 @@ align-self: start;
   font-weight: bold;
   margin-bottom: 10px;
 }
-.addto_order {
+.addto_cart {
   display: block;
   width: 60%;
   padding: 10px 0;
