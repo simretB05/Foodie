@@ -3,7 +3,7 @@
         <business-page-header></business-page-header>
         <main class="main">
             <h2 class="main-title">this is where you find resturans</h2>
-           <div  class="restaurant_container">
+            <div  class="restaurant_container">
                 <div class="resturan-card" v-for="(rest,i) in responseData" :key="i" >
                     <div class="restaurant_info">
                         <p class="restaurant_name">{{ rest[`name`] }}</p>
@@ -12,7 +12,6 @@
                         <p class="restaurant_email"> Email: {{ rest[`email`] }}</p>
                         <p class="restaurant_bio"> About-Restaurant: {{ rest[`bio`] }}</p>
                         <p class="restaurant_city"> Location:{{ rest[`city`] }}</p>
-                    
                     </div>
                     <div class="image_holder">  
                         <img  class="profile-img" :src="rest[`profile_url`]" alt="profile image">

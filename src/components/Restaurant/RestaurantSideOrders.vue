@@ -1,5 +1,6 @@
 <template>
-    <div class="main">
+    <div>
+        <div class="main">
        <h1 class="orders_title"> client orders are here</h1>
         <div class="orders_card" v-for="(order,i) in orders" :key="i">
             <div >
@@ -14,45 +15,47 @@
             </div>
         </div>
     </div>
+    </div>
 </template>
+
 <script>
   import axios from "axios";
   import Cookies from "vue-cookies"
     export default {
-    data() {
-    return {
-        token: Cookies.get( `token` ),
-        is_confirmed: undefined,
-        is_complete: undefined,
-        orders:[]
-    }
+
+        data() {
+            return {
+                token: Cookies.get( `restaurant_token` ),
+                // is_confirmed:`true`,
+                is_complete:'true',
+                orders:undefined
+                
+            }
     },
-  
+    mounted(){
+        this.getClientOrders()
+    },
     methods: {
-        getOrders(){
+        getClientOrders(){
             axios.request( {
-                url: `https://foodie.bymoen.codes/api/client-order`,
+                url: `https://foodie.bymoen.codes/api/restaurant-order`,
                 headers: {
                     'x-api-key': `qUikCEg0vdshWKhbZQKL`,
                     token:this.token 
                 },
-                params: {
-                    is_confirmed: this.is_confirmed,
+                // params: {
+                //     is_confirmed: this.is_confirmed,
                     is_complete:this.is_complete
-                }
+                // }
             } ).then( ( response ) => { 
                 this.orders = response[`data`]
               
             } ).catch( ( error ) =>{
                 error;
             } ) 
+            
+            }
         },
-        countOrders(){
-        },
-    },
-    mounted(){
-       this.getOrders()
-    },
     }
 </script>
 

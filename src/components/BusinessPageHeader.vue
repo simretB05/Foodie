@@ -99,7 +99,7 @@
                             <img class="desktopitem_img" src="/images/icons/shop.svg" alt=" login avatar"><p  class="seconderydesktopitem_text">View Account</p>
                         </li>
                     </router-link>
-                    <router-link   class="nav-link"  to="/partner-menu">
+                    <router-link   class="nav-link"  to="/partnerSide-order">
                         <li class="seconderydesktop_nav_item">
                             <img class="desktopitem_img" src="/images/icons/clipboard-list-check.svg" alt=" login avatar">
                             <p class="seconderydesktopitem_text">Orders</p>

@@ -14,12 +14,12 @@ import RestaurantLoginPage from '@/views/RestaurantLoginPage.vue'
 import PartnerMenu from '@/views/PartnerMenu.vue'
 import PartnersHomePage from '@/views/PartnersHomePage.vue'
 import SinglePartnerHomePage from '@/views/SinglePartnerHomePage.vue'
-// import RestaurantLoginPage from '@/views/OrdersPage.vue'
+import PartnerSideOrders from '@/views/PartnerSideOrders'
 import RestaurantProfilePage from '@/views/RestaurantProfilePage.vue'
 import RestaurantPublicPage from '@/views/RestaurantPublicPage.vue'
 import ResturantDicoveryPage from '@/views/ResturantDicoveryPage'
 import SingleRestaurantHomePage from '@/views/SingleRestaurantHomePage'
-// import ShoppingCart from '@/views/ShoppingCart.vue'
+import ShoppingCart from '@/views/ShoppingCart.vue'
 
 
 Vue.use(VueRouter)
@@ -83,6 +83,14 @@ const routes = [
               {
                 path: '/single-restaurant-home',
                 component:SingleRestaurantHomePage ,
+              },
+              {
+                path: '/shopping-cart',
+                component:ShoppingCart ,
+              },
+              {
+                path: '/partnerSide-order',
+                component:PartnerSideOrders ,
               },
               
     

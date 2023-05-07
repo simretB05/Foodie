@@ -38,27 +38,39 @@ import PageFooter from '@/components/PageFooter.vue'
         return {
             title: undefined,
             getRestaurant_id: undefined,
-            getrestaurantsdata: undefined,
-           
+            getrestaurantsdata: undefined,  
+            rest_json:[] 
         }
     },
     methods: {
         selectRestaurant(details){
-            this.getRestaurant_id = details[`target`].getAttribute(`restaurant_id` )
-            Cookies.set(`restaurant_id`,this.getRestaurant_id)
-            this.$router.push(`single-restaurant-home`)
+            this.getRestaurant_id = details[`target`].getAttribute(`restaurant_id`)
+            Cookies.set( `restaurant_id`, this.getRestaurant_id )
+            console.log(typeof(this.getRestaurant_id))
+            let rest_value = this.getrestaurantsdata 
+            console.log(rest_value)
+            for ( let i = 0; i < rest_value.length; i++ ){
+                if (String(rest_value[i][`restaurant_id`] )=== this.getRestaurant_id){
+                    this.rest_json =rest_value[i]
+                    Cookies.set( `resData`, this.rest_json)
+                }else{
+                    console.log(`itsnot a match`)
+                }
+            }
+            this.$router.push( `single-restaurant-home` )
+
+           
         }
     },
     mounted(){
             axios.request( {
-                // Url to send the post Method
                 url: `https://foodie.bymoen.codes/api/restaurants`,
                 headers: {
                     'x-api-key': `qUikCEg0vdshWKhbZQKL`
                 },
             } ).then( ( response ) => { 
                 this.getrestaurantsdata = response[`data`]
-                console.log( this.getrestaurantsdata )
+                
             } ).catch( ( error ) =>{
                 error;
             } ) 

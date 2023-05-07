@@ -3,7 +3,6 @@
 <business-page-header></business-page-header>
 <main class="main">
     <h2> Create a Partner Foodie Account </h2>
-
     <business-signup-form></business-signup-form>
 </main>
 <business-page-footer></business-page-footer>

@@ -1,9 +1,7 @@
 <template>
     <div>
-
         <main class="main">
             <h1>this is the partners menu page</h1>
-
             <div class="menu_card">
                 <label for=" menu item description">Menu item discription</label>
                 <input v-model="description" type="text" required placeholder="Item description">

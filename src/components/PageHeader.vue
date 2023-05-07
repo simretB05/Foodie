@@ -28,7 +28,7 @@
             <div @click="secondaryToggleHandler" class="nav_user_menu_card" > 
                 <img class="nav_user_menu_img" src="/images/icons/menu.svg" alt=" login avatar">
             </div>
-            <h3> Welcome {{ first_name }}!</h3>
+            <p class="primery-title"> Welcome {{ first_name }}!</p>
         </div>
         <nav v-if="is_primaryNavOpen" class="primary-nav">
             
@@ -81,6 +81,11 @@
                         </li>
                     </router-link>
                     <li class="secondery_nav_item">
+                            <img  class="item_img" src="/images/icons/shopping-cart.svg" alt="shopping cart icon">
+                            <p class="count_text">0</p> 
+                            <p class="item_text">Your Foodie Cart</p>
+                        </li>
+                    <li class="secondery_nav_item">
                         <button  class="logout_btn" @click="logoutHandler">Logout</button>
                     </li>
                 </ul>
@@ -108,6 +113,13 @@
                             <p class="seconderydesktopitem_text">Restaurants</p>
                         </li>
                     </router-link>
+                    <router-link   class="nav-link" to="/shopping-cart">
+                    <li class="seconderydesktop_nav_item">
+                            <img  class="desktopitem_img" src="/images/icons/shopping-cart.svg" alt="enter icon">
+                            <p class="count_text">0</p> 
+                            <p class="seconderydesktopitem_text">Your Foodie Cart</p>
+                        </li>
+                        </router-link>
                     <li class="seconderydesktop_nav_item">
                         <button  class="desktoplogout_btn" @click="logoutHandler">Logout</button>
                     </li>
@@ -238,7 +250,11 @@ justify-self: end;
  height: 20px;
  color: #7ed957;
 }
-
+.primery-title{
+    color: #7ed957;
+    font-size:1rem ;
+    font-weight: 600;
+}
 .main_nav,.secondery_nav_list{
     display:grid;
     place-items: center;
@@ -290,10 +306,18 @@ display: none;
     color: #7ed957;
     text-decoration: none;
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 1rem;
     
 }
+.count_text{
+    position: absolute;
+   top :26.4%;
+   right: 163px;
+   font-weight: 700;
+   color:#ff8000;
 
+
+}
 .logout_btn,.desktoplogout_btn{
     justify-self: start;
     background-color:#7ed957 ;
@@ -410,6 +434,16 @@ justify-self: end;
    color: #7ed957;
    font-weight: 700;
    
+}
+.count_text{
+    position: absolute;
+   top :26.4%;
+   right: 210px;
+   font-weight: 700;
+   color:#ff8000;
+   font-size: 1.2rem;
+
+
 }
 }
 

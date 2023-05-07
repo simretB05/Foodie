@@ -1,19 +1,24 @@
 <template>
     <main class="main" >
+      <div class="rest_info_card">
+          <h1 class="rest_name">{{restInfo[`name`]}} Restaurant Menu </h1>
+          <p class="rest_address"> Address:{{restInfo[`address`] }}</p>
+          <p class="rest_address">Phone-number:{{restInfo[`phone_number`]}}</p>
+      </div>
       <div class="main_card">
         <div class="menu_container">
-        <div class="menu_card" v-for="(menu,i) in menuArry" :key="i">
-          <div class="menu_img_card">           
-            <img  class="menu_image" :src="menu[`image_url`]" alt="">
-          </div>
+          <div class="menu_card" v-for="(menu,i) in menuArry" :key="i">
+            <div class="menu_img_card">           
+              <img  class="menu_image" :src="menu[`image_url`]" alt="">
+            </div>
           <div class="menu_details">
-           <h3 class="menu_name">{{menu[`name`]}}</h3> 
-           <p class="menu_description">{{menu[`description`]}}</p>
-           <p class="menu_price">{{menu[`price`]}}$CAD</p>
-           <button @click="addtoOrders" :menu_item="menu[`id`]" class="addto_order">Order</button>
+              <h3 class="menu_name">{{menu[`name`]}}</h3> 
+              <p class="menu_description">{{menu[`description`]}}</p>
+              <p class="menu_price">{{menu[`price`]}}$CAD</p>
+                <button @click="addtoOrders" :menu_item="menu[`id`]" class="addto_order"> Add To Orders</button>
           </div>  
         </div>
-    </div>
+      </div>
   </div>
     </main>
 </template>
@@ -26,8 +31,8 @@ import Cookies from "vue-cookies"
               restaurantId: undefined,
               menuArry: [],
               token: Cookies.get( `token` ),
-              menu_items:[]
-              
+              menu_items: [],
+              restInfo:undefined,
             }
     },
     methods: {
@@ -50,7 +55,6 @@ import Cookies from "vue-cookies"
       addtoOrders( details ){
         let menu_item = details[`target`].getAttribute( `menu_item` )
         this.menu_items.push( menu_item )
-                 console.log(this.menu_items)
         axios.request( {
                 url: `https://foodie.bymoen.codes/api/client-order`,
                 headers: {
@@ -64,21 +68,27 @@ import Cookies from "vue-cookies"
                 }
             } ).then( ( response) => {
              response
-            } ).catch( ( error ) =>
-            {
+            } ).catch( ( error ) =>{
                 error;
-               
             } )
       }
     },
     mounted(){
       let restaurant_id = Cookies.get( `restaurant_id` )
+      this.restInfo = Cookies.get( `resData` )
         this.restaurantId=restaurant_id
              this.getId(restaurant_id)  
     },   
     }
 </script>
 <style scoped>
+.rest_name{
+  
+}
+.rest_address{
+  font: 1rem; 
+
+}
 .main{
     min-height: 30vh;
     margin: 32px;
@@ -169,7 +179,7 @@ align-self: start;
   font-size: 1rem;
 }
 .addto_order {
-  width: 40%;
+  width: 70%;
 }
 }
 @media only screen and (min-width: 900px) {

@@ -2,7 +2,7 @@
     <div>
         <page-header></page-header>
         <main class="main">
-            <div><h4>Name of resturant</h4></div>
+            <div class="restaurant"><h1>Your Selected Restaurant Menu</h1></div>
           <restaurant-menu></restaurant-menu>
         </main>
         <page-footer></page-footer>
@@ -34,8 +34,19 @@ import PageFooter from '@/components/PageFooter.vue';
 
 <style scoped>
 .main{
+    display: grid;
+    place-items: center;
     min-height: 80vh;
     background-color: #f5f3f1;
-
+    margin-top: 40px;
+}
+.restaurant{
+    margin-top: 40px;
+    display: grid;
+    place-items: center;
+    justify-self: start;
+    width:30%;
+    color: #7ed957;
+    text-decoration: underline;
 }
 </style>
