@@ -41,7 +41,7 @@ import Cookies from "vue-cookies"
         },
         sendOrder(details){
              let order_id = details[`target`].getAttribute( `order_id` )
-            this.orderIDArray.push(order_id)
+            this.orderIDArray.unshift(order_id)
             axios.request( {
                 url: `https://foodie.bymoen.codes/api/client-order`,
                 headers: {

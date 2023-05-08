@@ -7,10 +7,10 @@
                     <p class="order_price"> Price {{order[`price`] }} $CAD</p>
                     <p class="order_id"> your Order Number {{ order[`order_id`] }}</p>
                 <div class="confirm-card">
-                    <p class="order_confirm">{{order[`is_complete`] }}</p>
-                    <p class="orders_confirm">{{order[`is_confirmed`]}}</p>
+                    <p class="order_confirm" v-if="is_complete===true && is_confirmed===true">Your  Order is Complete</p>
+                    <p class="order_confirm" v-else>Your  Order is confirmed </p>
                 </div>
-                <button  class="select_button" >Order</button>
+                <button  class="select_button" >ReOrder</button>
             </div>
         </div>
     </div>
@@ -42,6 +42,8 @@
                 }
             } ).then( ( response ) => { 
                 this.orders = response[`data`]
+                this.is_complete === false
+                this.is_confirmed === true
               
             } ).catch( ( error ) =>{
                 error;
