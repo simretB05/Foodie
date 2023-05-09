@@ -54,8 +54,7 @@ export default {
                this.succsses_message=`menu item is posted succesfully`
                       
               
-            } ).catch( ( error ) =>
-            {
+            } ).catch( ( error ) =>{
                 error;
                 this.errorMessage = "Invalid input! Please try again."
             } )
