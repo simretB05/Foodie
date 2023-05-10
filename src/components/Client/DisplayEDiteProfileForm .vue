@@ -63,7 +63,6 @@ export default {
                
                 this.message = `successfully Edited  Your information`
                 location.reload();
-
             } ).catch( ( error ) =>
             {
                 error;
@@ -79,11 +78,13 @@ export default {
 <style scoped>
 .edit-card{
     width: 80%;
+    /* background-color: #f2f2f2; */
+
 }
 .signup-card {
     display: grid;
   justify-items: center;
-  width: 70%;
+  width: 100%;
   margin: 32px auto;
   padding: 20px;
   background-color: #fcfcfb;

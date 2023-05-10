@@ -4,7 +4,7 @@
             <div class="info__card_holder"  >
                 <h1>Account Settings</h1>
                     <div  class="info-card" >
-                        <h2>{{userInfo[`username`] }}</h2>
+                        <h2>{{userInfo[`username`]}}</h2>
                         <div class="user-info">
                             <p>{{userInfo[`first_name`] }}</p>
                             <p>{{userInfo[`last_name`]}}</p>
@@ -14,12 +14,17 @@
                         </div>
                         <div class="buttin-holder" >
                             <button @click="OpenEditForm"><img class="edit-icon" src="/images/icons/pencil.svg" alt="edit icon"> Edite Profile</button>
-                            <button><img class="edit-icon" src="/images/icons/trash.svg" alt="edit icon"> Remove Profile</button>
+                            <button @click="OpenRemoveForm" ><img  class="edit-icon" src="/images/icons/trash.svg" alt="edit icon"> Remove Profile</button>
                         </div>
                     </div>
             </div>
-            <div class="edit-form-holder" v-if="is_edit" >
-               <display-e-dite-profile-form></display-e-dite-profile-form>
+            <div class="form-containers">
+                <div class="edit-form-holder" v-if="is_edit" >
+                    <display-e-dite-profile-form></display-e-dite-profile-form>
+                </div>
+                <div class="remove-form-holder" v-if="is_remove">
+                    <remove-client-profile></remove-client-profile>
+                </div>
             </div>
         </section>
     </div>
@@ -28,15 +33,18 @@
 import Cookies from "vue-cookies"
 import axios from "axios";
 import DisplayEDiteProfileForm from '@/components/Client/DisplayEDiteProfileForm .vue'
+import RemoveClientProfile from  '@/components/Client/RemoveClientProfile.vue'
 export default {
     components: {
-        DisplayEDiteProfileForm
+        DisplayEDiteProfileForm,
+        RemoveClientProfile
             },
     data() {
         return {
             client_id: Cookies.get(`client_id` ),
             userInfo: undefined,
-            is_edit:false
+            is_edit: false,
+            is_remove:false
         }
     },
     mounted() {
@@ -63,8 +71,11 @@ export default {
         },
         OpenEditForm(){
             this.is_edit = !this.is_edit
-            console.log(this.is_edit)
                 
+        },
+        OpenRemoveForm(){
+            this.is_remove = !this.is_remove
+                console.log(this.is_remove)
             }
     }
     }
@@ -164,11 +175,14 @@ button img {
 .remove_user{
     display: none;
 }
-.edit-form-holder{
-     width: 90%;
-     justify-self: start;
-     margin-left: 32px;
+.form-containers{
+    width: 90%;
 }
+.edit-form-holder{
+     
+     justify-self: start;
+}
+
 @media only screen and (min-width: 600px) {
     .info__card_holder{
         width: 80%;   
