@@ -11,7 +11,7 @@
                 <p class="menu_price"> Price: {{single_menu[`price`]}}$CAD</p>
                 <div class="btn">
                     <edit-menu :menu_id="single_menu[`id`]" ></edit-menu>
-                    <remove-menu ></remove-menu>
+                    <remove-menu :menu_id="single_menu[`id`]" ></remove-menu>
                 </div>
                 </div>  
                 
@@ -32,8 +32,14 @@ import RemoveMenu from '@/components/Restaurant/RemoveMenu.vue'
           RemoveMenu
     },
     mounted(){
-        console.log(this.single_menu)
+            this.$on(`menuId`, this.removeItemMenu)
+    },
+    methods: {
+        removeItemMenu(menuId) {
+             console.log(menuId)
+        }
     }
+
     }
 </script>
 

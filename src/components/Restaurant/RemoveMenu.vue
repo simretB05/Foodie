@@ -1,6 +1,6 @@
 <template>
     <div>
-         <button class="remove_btn" menu_id="menu_id">Remove Menu</button>
+         <button class="remove_btn"  @click="removeRestMenu" :menu_id="menu_id">Remove Menu</button>
     </div>
 </template>
 <script>
@@ -12,16 +12,16 @@ export default {
         },
         data() {
             return {
-            token:Cookies.get(`restaurant_token`)
+            token: Cookies.get( `restaurant_token` ),
+            menuArry:undefined
             }
         },
     mounted(){
-            
         },
         methods: {
-            removeRestMenu( details ){
-             let   getMenuId = details[`target`].getAttribute(`menu_id`)
-                  console.log(getMenuId)
+            removeRestMenu( details)  {
+                let getMenuId = details[`target`].getAttribute( `menu_id` )
+                this.$root.$emit(`menuId`,getMenuId)
                 axios.request( {
                     url: `https://foodie.bymoen.codes/api/menu`,
                     headers: {
@@ -33,10 +33,10 @@ export default {
                         menu_id:this.menu_id
                     }
                 } ).then( () =>{
-                    this.profileRemovemessage = `scussefully deleted your information`
+                 console.log( `scussefully deleted your information`)
                 } ).catch( ( error ) =>{
                     error;
-                    this.errorMessage = "Invalid input! Please try again."
+                console.log( "Invalid input! Please try again.")
                 } )
             },
         },
