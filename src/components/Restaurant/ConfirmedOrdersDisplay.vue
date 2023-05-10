@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div class="orders_card" v-for="(order,i) in confOrderArray" :key="i">
+        <div class="orders_card" v-for="(order,i) in  confdOrder" :key="i">
                     <h2 class="order_name">{{order[`name`]}}</h2>
                         <p class="order_price"> {{order[`price`] }} $CAD</p>
                         <p class="order_id"> Order  ID {{ order[`order_id`] }}</p>
-                        <complete-clients-orders></complete-clients-orders>
+                         <complete-clients-orders :order_id="order[`order_id`]"></complete-clients-orders>
          </div>
     </div>
 </template>
@@ -25,16 +25,13 @@ export default {
             }
     },
     mounted(){
-       this.displayConfOrders()
-
+this.displayConfOrders()
     },
     methods: {
         displayConfOrders(){
-            console.log( this.confdOrder )
-         let confiOrder_json =JSON.parse(this.confdOrder)
-            this.confOrderArray.push( confiOrder_json )
-            }
-        }
+        console.log(this.confdOrder)
+        },
+    }
     }
 </script>
 

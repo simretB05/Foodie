@@ -7,7 +7,7 @@
 </template>
 <script>
 import Cookies from "vue-cookies"
-// import axios from "axios";
+import axios from "axios";
 export default {
     props: {
 
@@ -15,28 +15,36 @@ export default {
     },
     data() {
         return {
-            
+            token: Cookies.get( `restaurant_token` ),
             orders: Cookies.get( `orders` ),
-            // confirmedArray:[]
+            confiArray:[],
+            is_complete:"true",
             }
     },
     mounted(){
     },
     methods: {
-        updateStatus(details){
-            let getOrder_item = details[`target`].getAttribute( `orderId` )
-            for ( let i = 0; i < this.orders.length; i++ ) {
-                if ( Number( this.orders[i]['order_id'] ) === Number( getOrder_item ) ){
-                    this.orders[i][`is_confirmed`] =1
-                    let confirmed_item = this.orders.splice( i, 1 )
-                    Cookies.set( `confirmed_orders`, confirmed_item )
-                    this.$root.$emit(`confiOrder` ,confirmed_item)
-                    let itemCard = details.target.closest( `.orders_card` )
-                 
-                    itemCard.remove()
-                    break;
-                }
-            }
+        updateStatus( details ){
+            this.order_id
+            let getOrder_item = details[`target`].getAttribute(`orderId` )
+            this.$root.$emit(`compOrder_id`, getOrder_item )   
+            axios.request( {
+                url: `https://foodie.bymoen.codes/api/restaurant-order`,
+                headers: {
+                    'x-api-key': `qUikCEg0vdshWKhbZQKL`,
+                    token: this.token,
+                    method: `PATCH`,
+                    data: {
+                        is_complete: this.is_complete,
+                        order_id: this.order_id
+                    }
+                },
+            } ).then( () =>{
+                console.log( `its complete` )
+            } ).catch( ( error ) =>
+            {
+                error;
+            } ) 
         },
     },
    

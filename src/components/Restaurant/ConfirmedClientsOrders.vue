@@ -17,43 +17,35 @@ export default {
         return {
             token: Cookies.get( `restaurant_token` ),
             orders: Cookies.get( `orders` ),
-            confirmedArray:[],
-            is_confirmed:true,
+            confiArray:[],
+            is_confirmed:"1",
             }
     },
     mounted(){
     },
     methods: {
-        updateStatus( details ) {
-            let getOrder_item = details[`target`].getAttribute( `orderId` )
-            for ( let i = 0; i < this.orders.length; i++ ) {
-                if ( this.orders[i]['order_id'] === Number( getOrder_item ) ){
-                    let confirmed_item = this.orders.splice( i, 1 )
-                    let conf_Json = JSON.stringify( confirmed_item[0] )
-                    this.confirmedArray.push( conf_Json )
-                    Cookies.set( `confirmed_orders`, this.confirmedArray )
-                    let itemCard = details.target.closest( `.orders_card` )
-                    itemCard.remove()
-                    axios.request( {
+        updateStatus( details ){
+            console.log(this.is_confirmed)
+            let getOrder_item = details[`target`].getAttribute(`orderId` )
+            this.$root.$emit(`confiOrder_id`, getOrder_item )   
+            axios.request( {
                 url: `https://foodie.bymoen.codes/api/restaurant-order`,
-                    headers: {
+                headers: {
                     'x-api-key': `qUikCEg0vdshWKhbZQKL`,
                     token: this.token,
                     method: `PATCH`,
                     data: {
                         is_confirmed: this.is_confirmed,
-                          order_id:this.order_id
+                        order_id: this.order_id
                     }
                 },
-            } ).then( (  ) =>{
-                    console.log(`its confirmed`)
+            } ).then( () =>
+            {
+                console.log( `its confirmed` )
             } ).catch( ( error ) =>
             {
                 error;
-            } )
-                
-                }
-            }
+            } ) 
         },
     },
    

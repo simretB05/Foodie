@@ -1,14 +1,13 @@
 <template>
     <div class="main">
-       <h1 class="orders_title"> Your orders</h1>
+       <h1 class="orders_title"> Your Confirmed orders</h1>
         <div class="orders_card" v-for="(order,i) in orders" :key="i">
             <div >
                 <h2 class="order_name">{{order[`name`]}}</h2>
                     <p class="order_price"> Price {{order[`price`] }} $CAD</p>
                     <p class="order_id"> your Order Number {{ order[`order_id`] }}</p>
                 <div class="confirm-card">
-                    <p class="order_confirm" v-if="is_complete===true && is_confirmed===true">Your  Order is Complete</p>
-                    <p class="order_confirm" v-else>Your  Order is confirmed </p>
+                    <p class="order_confirm"></p>
                 </div>
                 <button  class="select_button" >ReOrder</button>
             </div>
@@ -22,12 +21,11 @@
     data() {
     return {
         token: Cookies.get( `token` ),
-        is_confirmed: undefined,
-        is_complete: undefined,
+        is_confirmed: "1",
+        // is_complete: "true",
         orders:[]
     }
     },
-  
     methods: {
         getOrders(){
             axios.request( {
@@ -38,13 +36,11 @@
                 },
                 params: {
                     is_confirmed: this.is_confirmed,
-                    is_complete:this.is_complete
+                    // is_complete:this.is_complete
                 }
             } ).then( ( response ) => { 
                 this.orders = response[`data`]
-                this.is_complete === false
-                this.is_confirmed === true
-              
+              console.log(this.orders[0][`is_confirmed`])
             } ).catch( ( error ) =>{
                 error;
             } ) 

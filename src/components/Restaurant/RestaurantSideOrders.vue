@@ -40,17 +40,27 @@ export default {
             return {
                 token: Cookies.get( `restaurant_token` ),
                 orders:[],
-                confirmed_item:[]
+                confiArray:[]
             }
     },
     mounted(){
         this.getClientOrders()
-        this.$root.$on( `confOrder`, this.getClientOrders);
+        this.$root.$on( `confiOrder_id`, this.getClientOrders);
 
     },
     methods: {
-        getClientOrders(){
-        //    console.log( confOrder)
+        getClientOrders(confiOrder_id){
+            console.log( confiOrder_id )
+            for ( let i = 0; i < this.orders.length; i++ ){
+                if ( this.orders[i]['order_id'] === Number(confiOrder_id )){
+                    this.confiArray.push( this.orders[i] )
+                    Cookies.set( `confirmed_orders`, this.confiArray )
+                    this.orders.splice( i, 1 )
+                    // let itemCard = details.target.closest( `.orders_card` )
+                    // itemCard.remove()
+                    break
+                }
+            }
             axios.request( {
                 url: `https://foodie.bymoen.codes/api/restaurant-order`,
                 headers: {
@@ -60,19 +70,8 @@ export default {
             } ).then( ( response ) =>{
                         this.orders = response[`data`]
                         Cookies.set( `orders`, this.orders)
-                        // for ( let i = 0; i < confOrder.length; i++ ){
-                        //     for ( let j = 0; j < this.orders.length; j++ ) {
-                        //         if ( confOrder[i][`order_id`] === this.orders[j][`order_id`] ) {
-                        //             console.log( confOrder[i][`order_id`] )
-                        //             console.log( this.orders[j][`order_id`] )
-
-                        //         }                         
-
-                        //     }
-                        // }
-
-            } ).catch( ( error ) =>
-            {
+                       
+            } ).catch( ( error ) => {
                 error;
             } )
         },
@@ -96,11 +95,18 @@ export default {
     display: grid;
     place-items: center;
     width: 100%;
+    
+}
+.corders_container{
+    width: 90%;
 }
 .card{
     display: grid;
     place-items: center;
     width: 100%;
+}
+.confirmed_orders{
+ width: 90%;
 }
 .confirmed_orders_title,.confirmed_orders_title{
     margin: 30px;
@@ -149,9 +155,9 @@ export default {
   margin-right: 10px;
 }
 @media only screen and (min-width: 600px) {
-    /* .orders_card {
-        width: 100%;
-    } */
+    .corders_container{
+    width: 50%;
+}
 }
  @media only screen and (min-width: 900px) {
     .main{
@@ -161,6 +167,9 @@ export default {
         grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
         gap :16px;
     }
+    .corders_container{
+    width: 40%;
+}
     .card{
         width: 90%;
         grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));

@@ -1,7 +1,7 @@
 <template>
     <div>
         <main class="main">
-            <h1>this is the partners menu page</h1>
+            <h1>Create And Save Your Restaurant Men</h1>
             <div class="menu_card">
                 <label for=" menu item description">Menu item discription</label>
                 <input v-model="description" type="text" required placeholder="Item description">
@@ -15,19 +15,25 @@
             </div>
             <div>{{ succsses_message }}</div>
         </main>
+        <div>
+            <show-resturan-menu></show-resturan-menu>
+        </div>
     </div>
 </template>
 <script>
 import axios from "axios";
 import Cookies from "vue-cookies"
+import ShowResturanMenu from '@/components/Restaurant/ShowResturanMenu.vue';
 export default {
-
+    components: {
+        ShowResturanMenu
+    },
     data() {
         return {
-            description: undefined,
-            image_url: undefined,
-            name: undefined,
-            price: undefined,
+            description:undefined,
+            image_url:undefined,
+            name:undefined,
+            price:undefined,
             restaurant_token: Cookies.get(`restaurant_token` ),
             succsses_message:undefined
         }
@@ -52,8 +58,6 @@ export default {
 
             } ).then( ( ) =>{
                this.succsses_message=`menu item is posted succesfully`
-                      
-              
             } ).catch( ( error ) =>{
                 error;
                 this.errorMessage = "Invalid input! Please try again."
