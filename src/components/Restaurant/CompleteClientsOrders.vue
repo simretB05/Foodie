@@ -18,14 +18,15 @@ export default {
             token: Cookies.get( `restaurant_token` ),
             orders: Cookies.get( `orders` ),
             confiArray:[],
-            is_complete:"true",
+            is_complete:1,
             }
     },
     mounted(){
     },
     methods: {
         updateStatus( details ){
-            this.order_id
+            let isCompleteValue = this.is_confirmed === 0 ? 'false' : 'true';
+
             let getOrder_item = details[`target`].getAttribute(`orderId` )
             this.$root.$emit(`compOrder_id`, getOrder_item )   
             axios.request( {
@@ -33,12 +34,12 @@ export default {
                 headers: {
                     'x-api-key': `qUikCEg0vdshWKhbZQKL`,
                     token: this.token,
+                },
                     method: `PATCH`,
                     data: {
-                        is_complete: this.is_complete,
+                        is_complete: isCompleteValue ,
                         order_id: this.order_id
                     }
-                },
             } ).then( () =>{
                 console.log( `its complete` )
             } ).catch( ( error ) =>

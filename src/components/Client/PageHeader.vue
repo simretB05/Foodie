@@ -175,10 +175,6 @@ export default {
                 }
             }
         },
-        // countOrders(){
-        //     this.numberOfOrders.push( this.clientInfo_json )
-        //     console.log( this.numberOfOrders )
-        // }
     },
     mounted(){
         this.$root.$on( `userData`, this.getClientInfo );

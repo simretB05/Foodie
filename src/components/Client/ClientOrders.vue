@@ -1,17 +1,17 @@
 <template>
-    <div class="main">
-       <h1 class="orders_title"> Your Confirmed orders</h1>
+    <div class="main" >
+       <h1 class="orders_title"> Your Confirmed Orders</h1>
         <div class="orders_card" v-for="(order,i) in orders" :key="i">
-            <div >
                 <h2 class="order_name">{{order[`name`]}}</h2>
                     <p class="order_price"> Price {{order[`price`] }} $CAD</p>
-                    <p class="order_id"> your Order Number {{ order[`order_id`] }}</p>
+                    <p class="order_id"> your Order Number {{ order[`order_id`]}}</p>
                 <div class="confirm-card">
-                    <p class="order_confirm"></p>
+                    <p class="order_complete"  v-if="order[`is_complete`]" >Your Order is Complete </p>
+                    <p class="order_confirm" v-else-if="order[`is_confirmed`]" > Your Order is Confirmed </p>
+                    <p class="order_confirmNot" v-else > Your Order is  NOT Confirmed </p>
                 </div>
                 <button  class="select_button" >ReOrder</button>
             </div>
-        </div>
     </div>
 </template>
 <script>
@@ -21,9 +21,7 @@
     data() {
     return {
         token: Cookies.get( `token` ),
-        is_confirmed: "1",
-        // is_complete: "true",
-        orders:[]
+        orders: [],
     }
     },
     methods: {
@@ -34,13 +32,10 @@
                     'x-api-key': `qUikCEg0vdshWKhbZQKL`,
                     token:this.token 
                 },
-                params: {
-                    is_confirmed: this.is_confirmed,
-                    // is_complete:this.is_complete
-                }
+           
             } ).then( ( response ) => { 
                 this.orders = response[`data`]
-              console.log(this.orders[0][`is_confirmed`])
+                
             } ).catch( ( error ) =>{
                 error;
             } ) 
@@ -108,6 +103,20 @@ padding: 10px;
 transition: background-color 0.5s ease;
 box-shadow: 0 1px 0 #afcce7;
 margin:16px ;
+}
+.order_confirmNot{
+ color:red
+}
+.order_confirm{
+    color: rgb(255, 179, 0);
+    font-weight: 900;
+    text-align: start;
+    width: 100%;
+}
+.order_complete{
+    color: blue;
+    font-weight: 900;
+
 }
 .select_button:active{
     transform: translateY(3px);
