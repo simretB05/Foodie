@@ -6,22 +6,30 @@
                 <img  class="menu_image" :src="single_menu[`image_url`]" alt="food image">
                 </div>
                 <div class="menu_details">
-                <h3 class="menu_name"> Name:{{single_menu[`name`]}}</h3> 
-                <p class="menu_description"> Description{{single_menu[`description`]}}</p>
-                <p class="menu_price"> Price {{single_menu[`price`]}}$CAD</p>
+                <h3 class="menu_name"> Name: {{single_menu[`name`]}}</h3> 
+                <p class="menu_description"> Description: {{single_menu[`description`]}}</p>
+                <p class="menu_price"> Price: {{single_menu[`price`]}}$CAD</p>
+                <div class="btn">
+                    <edit-menu :menu_id="single_menu[`id`]" ></edit-menu>
+                    <remove-menu ></remove-menu>
+                </div>
                 </div>  
+                
             </div>
     </div>
     </div>
 </template>
 
 <script>
+import EditMenu from '@/components/Restaurant/EditMenu.vue';
+import RemoveMenu from '@/components/Restaurant/RemoveMenu.vue'
     export default {
         props: {
             single_menu:Object
             },
     components: {
-          
+        EditMenu,
+          RemoveMenu
     },
     mounted(){
         console.log(this.single_menu)
@@ -127,6 +135,12 @@ align-self: start;
   border-radius: 10px;
   cursor: pointer;
 }
+.btn{
+
+    display: grid;
+    place-items: center;
+
+}
 
 @media only screen and (min-width: 600px) {
   .menu_card{
@@ -160,6 +174,14 @@ align-self: start;
   grid-template-columns:repeat(auto-fit, minmax(500px, 1fr));
 
 } 
+.btn{
+width: 70%;
+display: grid;
+place-items: center;
+grid-template-columns:repeat(auto-fit, minmax(40px, 1fr));
+gap:40px
+
+}
 
 }
 </style>

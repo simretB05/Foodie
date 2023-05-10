@@ -5,7 +5,6 @@
         </div>
     </div>
 </template>
-
 <script>
 import axios from "axios";
 import Cookies from "vue-cookies"
@@ -21,24 +20,24 @@ export default {
         }
     },
     mounted(){
-        axios.request( {
-
-                url: `https://foodie.bymoen.codes/api/menu`,
-                headers: {
-                    'x-api-key': `qUikCEg0vdshWKhbZQKL`,
-                },
-                params: {
-                  restaurant_id: this.get_resId
-                }
-            } ).then( ( response ) => { 
-              this.menuArry = response[`data`]
-            } ).catch( ( error ) =>{
-                error;
-            } ) 
-        
+       this.getItems()
     },
     methods: {
-        
+        getItems() {
+        axios.request( {
+        url: `https://foodie.bymoen.codes/api/menu`,
+        headers: {
+            'x-api-key': `qUikCEg0vdshWKhbZQKL`,
+        },
+        params: {
+        restaurant_id: this.get_resId
+        }
+        } ).then( ( response ) => { 
+        this.menuArry = response[`data`]
+        } ).catch( ( error ) =>{
+        error;
+        } ) 
+    },
       }
     }
 </script>
