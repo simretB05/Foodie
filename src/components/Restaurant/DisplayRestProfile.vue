@@ -40,7 +40,7 @@ export default {
             password: this.password,
             city:this.city,
             bio:this.bio,
-            token: Cookies.get( `restaurant_token` ),
+            token:Cookies.get(`restaurant_token`),
             restaurant_id: Cookies.get( `restaurant_id` ),
         }
     },
@@ -61,12 +61,15 @@ export default {
                 },
                 method: `PATCH`,
                 data: {
-                    email: this.email_value,
-                    first_name: this.firstName_value,
-                    last_name: this.lastName_value,
-                    image_url: this.image_url,
-                    username: this.UserName_value,
-                    password: this.pass_value,
+                    email:this.email,
+                    name: this.name,
+                    address: this.address,
+                    profile_url: this.profile_url,
+                    banner_url:this.banner_url,
+                    phone_number: this.phone_number,
+                    password: this.password,
+                    city:this.city,
+                    bio:this.bio,
                 }
             } ).then( () => {
                

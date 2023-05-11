@@ -57,7 +57,9 @@ export default {
                 }
 
             } ).then( ( ) =>{
-               this.succsses_message=`menu item is posted succesfully`
+                this.succsses_message = `menu item is posted succesfully`
+                location.reload();
+
             } ).catch( ( error ) =>{
                 error;
                 this.errorMessage = "Invalid input! Please try again."

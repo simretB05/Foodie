@@ -5,15 +5,16 @@
                 <h1>Account Settings</h1>
                     <div  class="info-card" >
                         <h2>{{restInfo[`name`]}}</h2>
-                        <div class="user-info">
-                            <p> name:{{restInfo[`name`] }}</p>
+                        <div class="user-info"  v-if="restInfo">
+                            <p> {{restInfo[`name`] }}</p>
                             <p> Address: {{restInfo[`address`]}}</p>
                             <p> Phone#: {{restInfo[`phone_number`]}}</p>
                             <p> Email: {{restInfo[`email`]}}</p>
-                            <p> {{restInfo[`passward`] }}</p>
+                            <p> City {{ restInfo[`city`] }}</p>
+
+                            <p> {{restInfo[`bio`] }}</p>
                             <img  class="profile-img" :src="restInfo[`profile_url`]" alt="profile_image">
                             <img  class="profile-img" :src="restInfo[`banner_url`]" alt="profile_image">
-
                         </div>
                         <div class="buttin-holder" >
                             <button @click="OpenEditForm"><img class="edit-icon" src="/images/icons/pencil.svg" alt="edit icon"> Edite Profile</button>
@@ -66,6 +67,7 @@ export default {
                 }
             } ).then( ( response ) =>{
                 this.restInfo = response[`data`][0]
+                console.log(this.restInfo)
                this.$root.$emit(`restInfo`, this.restInfo)
             } ).catch( ( error ) =>
             {
