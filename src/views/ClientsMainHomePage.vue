@@ -2,8 +2,8 @@
     <div>
         <page-header></page-header>
         <div class="main">
-                <div>
-                    <h3>wellcome to Foodie</h3>
+                <div class="card">
+                    <h1>wellcome to Foodie</h1>
                 </div>
         </div>
         <page-footer></page-footer>
@@ -60,9 +60,12 @@ import PageFooter from '@/components/Client/PageFooter.vue'
     background-color: #f1f2f4;
     
 }
-  .home-img{
-  width: 90%;
-  height: 100%;
-  }
+.card{
+    display:grid;
+    place-items: center;
+}
+h1{
+margin: 32px;
+}
 
 </style>

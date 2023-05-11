@@ -1,21 +1,27 @@
 <template>
     <div class="edit-card" v-if="!is_Editclosed">
-        <img @click="closeEditForm" class="nav_user_menu_img" src="/images/icons/cross.svg" alt=" login avatar">
         <div class="signup-card">
-        <label for="email">Your profile Image</label>
-        <input type="text" v-model="image_url" placeholder="enter your picture"> 
+        <img @click="closeEditForm" class="nav_user_menu_img" src="/images/icons/cross.svg" alt=" login avatar">
+        <label for="email">Your Bussiness profile Image</label>
+        <input type="text" v-model=" banner_url" placeholder="enter your picture"> 
+        <label for="email">Your Bussiness Banner Image</label>
+        <input type="text" v-model=" profile_url" placeholder="enter your picture"> 
         <label for="email">Email</label>
-        <input  v-model="email_value" type="text" required placeholder="enter your email">
-        <label  for="first name">First Name</label>
-        <input  v-model="firstName_value" type="text" required placeholder="first name">
-        <label for="first name">Last Name</label>
-        <input   v-model="lastName_value" type="text" required placeholder="Last name">
-        <label for="first name">User name</label>
-        <input   v-model="UserName_value" type="text" required placeholder="enter your User Name">
+        <input  v-model="email" type="text" required placeholder="enter your email">
+        <label  for="Business name">Business Name</label>
+        <input  v-model="name" type="text" required placeholder="name">
+        <label for="address">Address</label>
+        <input   v-model="address" type="text" required placeholder="address">
+        <label for="phone number">Phone Number</label>
+        <input   v-model="phone_number" type="text" required placeholder="phone-number">
+        <label for="Bio">Bio</label>
+        <input   v-model="bio" type="text" required placeholder="Bio">
+        <label for="city">City</label>
+        <input   v-model="city" type="text" required placeholder="City">
         <label  for="password">Password</label>
-        <input  v-model="pass_value" type="password" required placeholder="enter your User Password">
+        <input  v-model="password" type="password" required placeholder="Password">
         <button @click=" editUserData" type="submit">Save changes</button>
-    </div>
+        </div>
     </div>
 </template>
 <script>
@@ -25,27 +31,30 @@ export default {
     data() {
         return {
             is_Editclosed: false,
-            email:this.email_value,
-            first_name: this.firstName_value,
-            last_name: this.lastName_value,
-            image_url: this.image_url,
-            username: this.UserName_value,
-            password: this.pass_value,
-            token: Cookies.get( `token` ),
-            getClient_id: Cookies.get( `client_id` ),
+            email:this.email,
+            name: this.name,
+            address: this.address,
+            profile_url: this.profile_url,
+            banner_url:this.banner_url,
+            phone_number: this.phone_number,
+            password: this.password,
+            city:this.city,
+            bio:this.bio,
+            token: Cookies.get( `restaurant_token` ),
+            restaurant_id: Cookies.get( `restaurant_id` ),
         }
     },
     mounted(){
-        this.$root.$emit(`userInfo`,this.editInfo)
+        this.$root.$emit(`restInfo`,this.editInfo)
+
     },
     methods: {
         closeEditForm(){
             this.is_Editclosed = !this.is_Editclosed
-                console.log(this.is_Editclosed)
         },
         editUserData(){
             axios.request( {
-                url: `https://foodie.bymoen.codes/api/client`,
+                url: `https://foodie.bymoen.codes/api/restaurant`,
                 headers: {
                     'x-api-key': `qUikCEg0vdshWKhbZQKL`,
                     token: this.token
@@ -77,9 +86,9 @@ export default {
 
 <style scoped>
 .edit-card{
-    width: 80%;
-    /* background-color: #f2f2f2; */
+    width: 100%;
 
+background-color: white;
 }
 .signup-card {
     display: grid;
@@ -129,6 +138,7 @@ display: block;
 .nav_user_menu_img{
 width: 20px;
 height: 20px;
+
 }
 @media only screen and (min-width: 600px) {
     .signup-card {

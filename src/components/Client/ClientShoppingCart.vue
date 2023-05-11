@@ -10,7 +10,7 @@
                     <p class="order_confirm">{{order[`is_complete`] }}</p>
                     <p class="orders_confirm">{{order[`is_confirmed`]}}</p>
                 </div>
-                <button  @click="sendOrder" :order_id="order[`id`]" class="select_button"  >Order</button>
+                <button  @click="sendOrder" :order_id="order[`id`]" class="select_button" >Order</button>
             </div>
         </div>
     </div>
@@ -36,8 +36,6 @@ import Cookies from "vue-cookies"
     methods: {
         getOrderItems() {
             this.orderArray = this.order
-
-
         },
         sendOrder(details){
              let order_id = details[`target`].getAttribute( `order_id` )
@@ -54,7 +52,9 @@ import Cookies from "vue-cookies"
                   restaurant_id:this.restaurantId
                 }
             } ).then( ( response) => {
-             response
+                response
+                this.$router.push( `/client-orders` )
+
             } ).catch( ( error ) =>{
                 error;
             } )

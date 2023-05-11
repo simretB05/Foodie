@@ -19,7 +19,7 @@
                         <div class="deskImage-holder">
                                 <img class="nav_desktopuser_signup_img" src="/images/icons/user.svg" alt=" login avatar">
                         </div>
-                        <p class="nav_desktopsingup_text">Sing Up</p>
+                        <p class="nav_desktopsingup_text">Sign Up</p>
                     </li>
                 </router-link> 
             </ul>
@@ -48,7 +48,7 @@
                         <div class="nav_user_avatar_card" >    
                             <img class="nav_user_signup_img" src="/images/icons/user.svg" alt=" login avatar">
                         </div>
-                        <router-link to="/user-signup"  class="nav-link"><p class="nav_singup_text">Sing Up</p> </router-link> 
+                        <router-link to="/user-signup"  class="nav-link"><p class="nav_singup_text">Sign Up</p> </router-link> 
                     </li>
                 </ul>
             </div>

@@ -1,6 +1,6 @@
 <template>
     <div class="main" >
-       <h1 class="orders_title"> Your Confirmed Orders</h1>
+       <h1 class="orders_title"> Your Orders</h1>
         <div class="orders_card" v-for="(order,i) in orders" :key="i">
                 <h2 class="order_name">{{order[`name`]}}</h2>
                     <p class="order_price"> Price {{order[`price`] }} $CAD</p>
@@ -53,6 +53,9 @@
 .main{
     display: grid;
     place-items: center;
+}
+h1{
+    margin: 32px;
 }
 .orders_card {
     display: grid;

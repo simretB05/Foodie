@@ -1,6 +1,6 @@
 <template>
     <div>
-         <router-link to="/partner-home"><h2>Partners</h2></router-link>
+         <router-link   class="link" to="/"><h2>Click Here To Register Or Log In As A Client</h2></router-link>
     </div>
 </template>
 
@@ -16,7 +16,12 @@ div{
     min-height: 10vh;
     
 }
+.link{
+   text-decoration: none;
+   margin: 32px;
+
+}
 h2{
-    color: red;
+    color: rgb(240, 226, 226);
 }
 </style>
