@@ -66,7 +66,7 @@
                             <img class="item_img" src="/images/icons/shop.svg" alt=" login avatar"><p  class="item_text">View Account</p>
                         </li>
                     </router-link>
-                    <router-link   class="nav-link" to="/partner-menu">
+                    <router-link   class="nav-link" to="/partnerSide-order">
                         <li class="secondery_nav_item">
                             <img class="item_img" src="/images/icons/clipboard-list-check.svg" alt=" login avatar">
                             <p class="item_text">Orders</p>
@@ -148,9 +148,9 @@ export default {
             this.is_scondaryNavOpen = !this.is_scondaryNavOpen
         },
         logoutHandler(){
-            Cookies.remove( `client_id` )
-            Cookies.remove( `client_info` )
-            Cookies.remove( `token` )
+            Cookies.remove( `restaurant_id` )
+            Cookies.remove( `rest_info` )
+            Cookies.remove( `restaurant_token` )
             this.$router.push(`/`)
         },
         getRestaurantInfo( restData ){

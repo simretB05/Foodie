@@ -41,7 +41,6 @@ export default {
     methods: {
         closeEditForm(){
             this.is_Editclosed = !this.is_Editclosed
-                console.log(this.is_Editclosed)
         },
         editUserData(){
             axios.request( {

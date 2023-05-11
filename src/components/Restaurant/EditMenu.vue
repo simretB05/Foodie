@@ -1,6 +1,6 @@
 <template>
     <div>
-         <button class="edit_btn">Edit Menu</button>
+        
     </div>
 </template>
 

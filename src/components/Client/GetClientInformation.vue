@@ -75,7 +75,6 @@ export default {
         },
         OpenRemoveForm(){
             this.is_remove = !this.is_remove
-                console.log(this.is_remove)
             }
     }
     }

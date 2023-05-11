@@ -3,7 +3,6 @@
 <p>{{ message }}</p>
     </div>
 </template>
-
 <script>
   import axios from "axios";
 //  import Cookies from "vue-cookies"
@@ -11,11 +10,9 @@
  data() {
             return {
                 message: undefined,
-        
     }
  },
     methods: {
-            
     },
         mounted(){
             axios.request({
@@ -29,11 +26,9 @@
             error;
             this.errorMessage="please try again"
         } )
-            
         }
     }
 </script>
-
 <style scoped>
 
 </style>

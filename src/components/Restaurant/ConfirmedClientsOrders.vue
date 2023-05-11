@@ -27,7 +27,6 @@ export default {
         updateStatus( details ){
             console.log( this.is_confirmed )
             let isConfirmedValue = this.is_confirmed === 0 ? 'false' : 'true';
-
             let getOrder_item = details[`target`].getAttribute(`orderId` )
             this.$root.$emit(`confiOrder_id`, getOrder_item )   
             axios.request( {

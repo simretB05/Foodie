@@ -16,7 +16,7 @@
            </div>
             <div class="card">
                 <div class="confirmed_orders">
-                    <h2 class="confirmed_orders_title">   Confirmed Client Orders</h2>
+                    <h2 class="confirmed_orders_title"> Confirmed Client Orders</h2>
                    <confirmed-orders-display></confirmed-orders-display>
 
                 </div>
@@ -50,7 +50,6 @@ export default {
     },
     methods: {
         getClientOrders(confiOrder_id){
-            console.log( confiOrder_id )
             for ( let i = 0; i < this.orders.length; i++ ){
                 if ( this.orders[i]['order_id'] === Number(confiOrder_id )){
                     this.confiArray.push( this.orders[i] )

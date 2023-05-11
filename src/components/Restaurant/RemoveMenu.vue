@@ -33,10 +33,10 @@ export default {
                         menu_id:this.menu_id
                     }
                 } ).then( () =>{
-                 console.log( `scussefully deleted your information`)
+              this.scussMessage=  ` deleted your information`
                 } ).catch( ( error ) =>{
                     error;
-                console.log( "Invalid input! Please try again.")
+                this.errorMessage=`Invalid input! Please try again.`
                 } )
             },
         },

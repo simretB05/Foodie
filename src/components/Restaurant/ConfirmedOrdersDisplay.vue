@@ -29,7 +29,6 @@ this.displayConfOrders()
     },
     methods: {
         displayConfOrders(){
-        console.log(this.confdOrder)
         },
     }
     }

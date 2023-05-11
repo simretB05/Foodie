@@ -67,7 +67,6 @@ export default {
                 }
             } ).then( ( response ) =>{
                 this.restInfo = response[`data`][0]
-                console.log(this.restInfo)
                this.$root.$emit(`restInfo`, this.restInfo)
             } ).catch( ( error ) =>
             {
@@ -80,7 +79,6 @@ export default {
         },
         OpenRemoveForm(){
             this.is_remove = !this.is_remove
-                console.log(this.is_remove)
             }
     }
     }

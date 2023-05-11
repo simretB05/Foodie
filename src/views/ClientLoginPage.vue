@@ -47,8 +47,8 @@ import PageFooter from "@/components/Client/PageFooter.vue";
                 params: {
                     client_id:`number`
                 }
-            } ).then( ( response ) => {
-                console.log(response)
+            } ).then( ( response ) =>{
+                response
                 this.$router.push( `/discovery-page` )
             } ).catch( ( error ) =>
             {

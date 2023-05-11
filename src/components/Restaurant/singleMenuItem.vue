@@ -1,43 +1,58 @@
 <template>
     <div class="main">
-        <div class="main_card">
-            <div class="menu_card" >
+          <div class="main_card">
+              <div class="menu_card" >
                 <div class="menu_img_card">           
-                <img  class="menu_image" :src="single_menu[`image_url`]" alt="food image">
+                   <img  class="menu_image" :src="single_menu[`image_url`]" alt="food image">
                 </div>
                 <div class="menu_details">
-                <h3 class="menu_name"> Name: {{single_menu[`name`]}}</h3> 
-                <p class="menu_description"> Description: {{single_menu[`description`]}}</p>
-                <p class="menu_price"> Price: {{single_menu[`price`]}}$CAD</p>
-                <div class="btn">
-                    <edit-menu :menu_id="single_menu[`id`]" ></edit-menu>
-                    <remove-menu :menu_id="single_menu[`id`]" ></remove-menu>
-                </div>
+                  <h3 class="menu_name"> Name: {{single_menu[`name`]}}</h3> 
+                  <p class="menu_description"> Description: {{single_menu[`description`]}}</p>
+                  <p class="menu_price"> Price: {{single_menu[`price`]}}$CAD</p>
+                  <div class="btn">
+                    <button @click="OpenEditForm" class="edit_btn">Edit Menu</button>
+                      <remove-menu :menu_id="single_menu[`id`]" ></remove-menu>
+                  </div>
                 </div>  
                 
-            </div>
-    </div>
+              </div>
+              <div v-if="is_edit">
+                <edit-resturant-menu></edit-resturant-menu>
+              </div>
+               
+          </div>
     </div>
 </template>
 
 <script>
-import EditMenu from '@/components/Restaurant/EditMenu.vue';
 import RemoveMenu from '@/components/Restaurant/RemoveMenu.vue'
+import EditResturantMenu  from '@/components/Restaurant/EditResturantMenu.vue'
     export default {
-        props: {
+      components: {
+        
+        RemoveMenu,
+        EditResturantMenu
+  },
+  props: {
             single_menu:Object
+  },
+            data() {
+              return {
+                is_edit: true,
+
+              }
             },
-    components: {
-        EditMenu,
-          RemoveMenu
-    },
+ 
     mounted(){
             this.$on(`menuId`, this.removeItemMenu)
     },
     methods: {
         removeItemMenu(menuId) {
-             console.log(menuId)
-        }
+             menuId
+      },
+      OpenEditForm(){
+        this.is_edit=!this.is_edit
+      }
     }
 
     }
@@ -146,6 +161,22 @@ align-self: start;
     display: grid;
     place-items: center;
 
+}
+.edit_btn {
+    width: 80px;
+    background-color:#dfe4de;;
+    border: none;
+    border-radius: 15px;
+    color: rgb(230, 70, 70);
+    font-weight: 700;
+    padding: 10px;
+    transition: background-color 0.5s ease;
+    box-shadow: 0 1px 0 #afcce7;
+    margin:16px ;
+}
+.edit_btn:active{
+    transform: translateY(3px);
+box-shadow: none;
 }
 
 @media only screen and (min-width: 600px) {
