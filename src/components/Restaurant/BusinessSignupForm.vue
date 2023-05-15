@@ -1,4 +1,6 @@
 <template>
+    <div class="signin-container">
+     
     <div class="signup-card">
         <label for="email">Your Bussiness profile Image</label>
         <input type="text" v-model=" banner_url" placeholder="enter your picture"> 
@@ -20,15 +22,22 @@
         <input  v-model="password" type="password" required placeholder="Password">
         <button @click="getResponseToken" type="submit">submit</button>
     </div>
+    <tost-message  v-if="showToast" :title="toastTitle" :message="toastMessage"></tost-message>
+
+</div>
+
 </template>
 
 <script>
 import axios from "axios";
 import Cookies from "vue-cookies"
-
-
+import TostMessage from  '@/components/TostMessage.vue'
 export default {
-        data() {
+    components: {
+        TostMessage
+
+        },
+       data() {
             return {
                 name: undefined,
                 phone_number: undefined,
@@ -40,20 +49,21 @@ export default {
                 profile_url: undefined,
                 banner_url:undefined,
                 restaurant_token: undefined,
-                restaurant_id:undefined
+                restaurant_id: undefined,
+                showToast: false,
+                toastTitle: undefined,
+                toastMessage:undefined
             }
         },
     methods: {
         getResponseToken(){
             axios.request( {
-                // Url to send the post Method
                 url: `https://foodie.bymoen.codes/api/restaurant`,
                 headers: {
                     'x-api-key': `qUikCEg0vdshWKhbZQKL`
             },
                 method: `POST`,
                 data: {
-                    // data values required to send a POST login
                     email: this.email,
                     name: this.name,
                     address: this.address,
@@ -65,19 +75,16 @@ export default {
                     password: this.password,
                 
                 }
-                // on a response, assign a variable to the value of a response  
             } ).then( ( response ) => {
                 this.restaurant_token = response[`data`][`token`]
                 this.restaurant_id = response[`data`][`restaurantId`]
-                //set Cookies with a value of response from axios POST method
                 Cookies.set( `restaurant_token`, this.restaurant_token )
                 Cookies.set( `restaurant_id`, this.restaurant_id )
                 this.$router.push(`/partner-home`) 
-            } ).catch( ( error ) =>
-            {
-                error;
-                // if not successful displaying a error mssage
-                this.errorMessage = "Invalid input! Please try again."
+            } ).catch( ( error ) =>{
+                this.toastTitle=`Error`
+                this.toastMessage =error[`response`][`data`]
+                this.showToast = true
             } )
         }
     }
@@ -85,7 +92,13 @@ export default {
 </script>
 
 <style scoped>
-signup-card {
+.signin-container{
+    display: grid;
+  justify-items: center;
+  width: 100%;
+  
+}
+.signup-card {
     display: grid;
   justify-items: center;
   width: 70%;

@@ -1,36 +1,45 @@
 <template>
     <div class="edit-card" v-if="!is_Editclosed">
-        <img @click="closeEditForm" class="nav_user_menu_img" src="/images/icons/cross.svg" alt=" login avatar">
+        <img @click="is_Editclosed = !is_Editclosed" class="nav_user_menu_img" src="/images/icons/cross.svg" alt=" login avatar">
         <div class="signup-card">
         <label for="email">Your profile Image</label>
         <input type="text" v-model="image_url" placeholder="enter your picture"> 
         <label for="email">Email</label>
-        <input  v-model="email_value" type="text" required placeholder="enter your email">
+        <input  v-model="email" type="text" required placeholder="enter your email">
         <label  for="first name">First Name</label>
-        <input  v-model="firstName_value" type="text" required placeholder="first name">
+        <input  v-model="first_name" type="text" required placeholder="first name">
         <label for="first name">Last Name</label>
-        <input   v-model="lastName_value" type="text" required placeholder="Last name">
-        <label for="first name">User name</label>
-        <input   v-model="UserName_value" type="text" required placeholder="enter your User Name">
+        <input   v-model="last_name" type="text" required placeholder="Last name">
+        <label for="first name">Username</label>
+        <input   v-model="username" type="text" required placeholder="enter your User Name">
         <label  for="password">Password</label>
-        <input  v-model="pass_value" type="password" required placeholder="enter your User Password">
-        <button @click=" editUserData" type="submit">Save changes</button>
+        <input  v-model="password" type="password" required placeholder="enter your User Password">
+        <button @click="editUserData" type="submit">Save changes</button>
     </div>
+    <tost-message  v-if="showToast" :title="toastTitle" :message="toastMessage"></tost-message>
+
     </div>
 </template>
 <script>
 import Cookies from "vue-cookies"
+import TostMessage from  '@/components/TostMessage.vue'
 import axios from "axios";
 export default {
+    components: {
+            TostMessage
+        },
     data() {
         return {
             is_Editclosed: false,
-            email:this.email_value,
-            first_name: this.firstName_value,
-            last_name: this.lastName_value,
-            image_url: this.image_url,
-            username: this.UserName_value,
-            password: this.pass_value,
+            email:undefined,
+            first_name: undefined,
+            last_name: undefined,
+            image_url: undefined,
+            username: undefined,
+            password: undefined,
+            showToast: false,
+            toastTitle: undefined,
+            toastMessage:undefined,
             token: Cookies.get( `token` ),
             getClient_id: Cookies.get( `client_id` ),
         }
@@ -39,9 +48,6 @@ export default {
         this.$root.$emit(`userInfo`,this.editInfo)
     },
     methods: {
-        closeEditForm(){
-            this.is_Editclosed = !this.is_Editclosed
-        },
         editUserData(){
             axios.request( {
                 url: `https://foodie.bymoen.codes/api/client`,
@@ -51,23 +57,22 @@ export default {
                 },
                 method: `PATCH`,
                 data: {
-                    email: this.email_value,
-                    first_name: this.firstName_value,
-                    last_name: this.lastName_value,
+                    email: this.email,
+                    first_name: this.first_name,
+                    last_name: this.last_name,
                     image_url: this.image_url,
-                    username: this.UserName_value,
-                    password: this.pass_value,
+                    username: this.Username,
+                    password: this.password,
                 }
-            } ).then( () => {
-               
-                this.message = `successfully Edited  Your information`
-                location.reload();
-            } ).catch( ( error ) =>
-            {
-                error;
-                this.errorMessage = "Invalid input! Please try again."
+            } ).then( () =>{
+                this.toastTitle = `Success`
+                this.toastMessage = `successfully Edited  Your information`
+                this.showToast = true
+            } ).catch( ( error ) =>{
+                this.toastTitle = `Error`
+                this.toastMessage =error[`response`][`data`][`error`]
+                this.showToast = true
             } )
-
         },
         }
     }
@@ -76,8 +81,7 @@ export default {
 
 <style scoped>
 .edit-card{
-    width: 80%;
-    /* background-color: #f2f2f2; */
+    width: 100%;
 
 }
 .signup-card {

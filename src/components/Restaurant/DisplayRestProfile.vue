@@ -22,12 +22,18 @@
         <input  v-model="password" type="password" required placeholder="Password">
         <button @click=" editUserData" type="submit">Save changes</button>
         </div>
+        <tost-message  v-if="showToast" :title="toastTitle" :message="toastMessage"></tost-message>
+
     </div>
 </template>
 <script>
 import Cookies from "vue-cookies"
 import axios from "axios";
+import TostMessage from  '@/components/TostMessage.vue'
 export default {
+    components: {
+         TostMessage
+    },
     data() {
         return {
             is_Editclosed: false,
@@ -42,6 +48,9 @@ export default {
             bio:this.bio,
             token:Cookies.get(`restaurant_token`),
             restaurant_id: Cookies.get( `restaurant_id` ),
+            showToast: false,
+            toastTitle: undefined,
+            toastMessage:undefined
         }
     },
     mounted(){
@@ -75,10 +84,10 @@ export default {
                
                 this.message = `successfully Edited  Your information`
                 location.reload();
-            } ).catch( ( error ) =>
-            {
-                error;
-                this.errorMessage = "Invalid input! Please try again."
+            } ).catch( ( error ) =>{
+                this.toastTitle=`Error`
+                this.toastMessage =error[`response`][`data`]
+                this.showToast = true
             } )
 
         },

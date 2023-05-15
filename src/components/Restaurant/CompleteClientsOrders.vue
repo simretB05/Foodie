@@ -25,8 +25,11 @@ export default {
     },
     methods: {
         updateStatus( details ){
-            let isCompleteValue = this.is_confirmed === 0 ? 'false' : 'true';
-
+                if ( this.is_complete === 0 ){
+                    this.is_complete=`false`
+                } else {
+                    this.is_complete=`true`
+                }
             let getOrder_item = details[`target`].getAttribute(`orderId` )
             this.$root.$emit(`compOrder_id`, getOrder_item )   
             axios.request( {
@@ -37,11 +40,10 @@ export default {
                 },
                     method: `PATCH`,
                     data: {
-                        is_complete: isCompleteValue ,
+                        is_complete:this.is_complete ,
                         order_id: this.order_id
                     }
             } ).then( () =>{
-                console.log( `its complete` )
             } ).catch( ( error ) =>
             {
                 error;

@@ -1,30 +1,33 @@
 <template>
-    <div class="signup-card">
-        <label for="email">Your profile Image</label>
-        <input type="text" v-model="image_url" placeholder="enter your picture"> 
-        <label for="email">Email</label>
-        <input  v-model="email_value" type="text" required placeholder="enter your email">
-        <label  for="first name">First Name</label>
-        <input  v-model="firstName_value" type="text" required placeholder="first name">
-        <label for="first name">Last Name</label>
-        <input   v-model="lastName_value" type="text" required placeholder="Last name">
-        <label for="first name">User name</label>
-        <input   v-model="UserName_value" type="text" required placeholder="enter your User Name">
-        <label  for="first name">Pass word</label>
-        <input  v-model="pass_value" type="password" required placeholder="enter your User Password">
-    <button @click="getResponse" type="submit">submit</button>
-    <button @click="getResponse" type="submit">Save changes</button>
+        <div class="signin-container">
+            <div class="signup-card">
+                <label for="email">Your profile Image</label>
+                <input type="text" v-model="image_url" placeholder="enter your picture"> 
+                <label for="email">Email</label>
+                <input  v-model="email_value" type="text" required placeholder="enter your email">
+                <label  for="first name">First Name</label>
+                <input  v-model="firstName_value" type="text" required placeholder="first name">
+                <label for="first name">Last Name</label>
+                <input   v-model="lastName_value" type="text" required placeholder="Last name">
+                <label for="first name">User name</label>
+                <input   v-model="UserName_value" type="text" required placeholder="enter your User Name">
+                <label  for="first name">Pass word</label>
+                <input  v-model="pass_value" type="password" required placeholder="enter your User Password">
+                <button @click="getResponse" type="submit">submit</button>
+            </div>
+            <tost-message  v-if="showToast" :title="toastTitle" :message="toastMessage"></tost-message>
 
-    </div>
+        </div>
 </template>
-
 <script>
+import TostMessage from  '@/components/TostMessage.vue'
 import axios from "axios";
 import Cookies from "vue-cookies"
-
-
 export default {
-        data() {
+        components: {
+            TostMessage
+        },
+        data(){
             return {
                 firstName_value: undefined,
                 lastName_value: undefined,
@@ -33,37 +36,40 @@ export default {
                 UserName_value: undefined,
                 image_url: undefined,
                 token: undefined,
-                client_id:undefined   
+                client_id: undefined,   
+                showToast: false,
+                toastTitle: undefined,
+                toastMessage:undefined
             }
         },
     methods: {
         getResponse(){
             axios.request( {
-                // Url to send the post Method
                 url: `https://foodie.bymoen.codes/api/client`,
                 headers: {
                     'x-api-key': `qUikCEg0vdshWKhbZQKL`
             },
                 method: `POST`,
                 data: {
-                    // data values required to send a POST login
                     email:this.email_value,
                     first_name: this.firstName_value,
                     last_name: this.lastName_value,
                     image_url:this.image_url,
                     username: this.UserName_value,
                     password: this.pass_value,
+                    showToast: false,
+                    toastTitle: undefined,
+                    toastMessage:undefined  
                 
                 }
-                // on a response, assign a variable to the value of a response  
             } ).then( ( response ) => {
                 Cookies.set( `token`, response[`data`][`token`] )
                 Cookies.set(`client_id`, response[`data`][`client_id`])
                 this.$router.push(`/` )
-            } ).catch( ( error ) =>
-            {
-                error;
-                this.errorMessage = "Invalid input! Please try again."
+            } ).catch( ( error ) =>{
+                this.toastTitle = `Error`
+                this.toastMessage =error[`response`][`data`]
+                this.showToast = true
             } )
         }
     },
@@ -72,6 +78,12 @@ export default {
 </script>
 
 <style scoped>
+.signin-container{
+    display: grid;
+  justify-items: center;
+  width: 100%;
+  
+}
 .signup-card {
     display: grid;
   justify-items: center;

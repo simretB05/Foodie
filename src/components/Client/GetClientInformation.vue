@@ -3,7 +3,7 @@
         <section class="main">
             <div class="info__card_holder"  >
                 <h1>Account Settings</h1>
-                    <div  class="info-card" >
+                    <div  class="info-card" v-if="userInfo" >
                         <h2>{{userInfo[`username`]}}</h2>
                         <div class="user-info">
                             <p>{{userInfo[`first_name`] }}</p>

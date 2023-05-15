@@ -25,8 +25,11 @@ export default {
     },
     methods: {
         updateStatus( details ){
-            console.log( this.is_confirmed )
-            let isConfirmedValue = this.is_confirmed === 0 ? 'false' : 'true';
+            if ( this.is_confirmed === 0 ){
+                    this.is_confirmed=`false`
+                } else {
+                    this.is_confirmed=`true`
+                }
             let getOrder_item = details[`target`].getAttribute(`orderId` )
             this.$root.$emit(`confiOrder_id`, getOrder_item )   
             axios.request( {
@@ -37,7 +40,7 @@ export default {
                 },
                     method: `PATCH`,
                     data: {
-                        is_confirmed: isConfirmedValue,
+                        is_confirmed: this.is_confirmed,
                         order_id: this.order_id
                     }
                 

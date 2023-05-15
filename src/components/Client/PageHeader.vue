@@ -3,7 +3,7 @@
         <div class="logo_holder"> 
             <router-link to="/"><img class="logo" src="/images/icons/foodie-logo.svg" alt="logo image"></router-link>
         </div>
-        <div   @click="primaryToggleHandler"   v-if="!getClient_id" class="nav_user_menu_card">    
+        <div   @click="is_primaryNavOpen = !is_primaryNavOpen"   v-if="!getClient_id" class="nav_user_menu_card">    
             <img v-if="!getClient_id" class="nav_user_menu_img" src="/images/icons/menu.svg" alt=" menu-icon">
         </div>
         <nav class="desktop_nav"  v-if="!getClient_id">     
@@ -25,7 +25,7 @@
             </ul>
         </nav>
         <div v-if="getClient_id || is_scondaryNavOpen" class="menu-icon-holder">
-            <div @click="secondaryToggleHandler" class="nav_user_menu_card" > 
+            <div @click="is_scondaryNavOpen = !is_scondaryNavOpen" class="nav_user_menu_card" > 
                 <img class="nav_user_menu_img" src="/images/icons/menu.svg" alt=" login avatar">
             </div>
             <p class="primery-title"> Welcome {{ first_name }}!</p>
@@ -34,7 +34,7 @@
             
             <div class="primary_nav_card">
                 <div>
-                        <div v-if="is_primaryNavOpen"  @click="primaryToggleHandler" class="nav_user_menu_card" > 
+                        <div v-if="is_primaryNavOpen"  @click="is_primaryNavOpen=!is_primaryNavOpen" class="nav_user_menu_card" > 
                             <img class="nav_user_menu_img" src="/images/icons/cross.svg" alt=" login avatar">
                         </div>
                 </div>
@@ -56,7 +56,7 @@
         <nav  v-if="is_scondaryNavOpen" class="secondary-nav">
                 <div  class="secondary_nav_card"  >
                     <div>
-                        <div @click="secondaryToggleHandler" class="nav_user_menu_card" > 
+                        <div @click="is_scondaryNavOpen = !is_scondaryNavOpen" class="nav_user_menu_card" > 
                         <img class="nav_user_menu_img" src="/images/icons/cross.svg" alt=" login avatar">
                     </div>
                 </div>
@@ -147,32 +147,21 @@ export default {
         }
     },
     methods: {
-        primaryToggleHandler()
-        {
-            this.is_primaryNavOpen = !this.is_primaryNavOpen
-        },
-        secondaryToggleHandler()
-        {
-            this.is_scondaryNavOpen = !this.is_scondaryNavOpen
-        },
-        logoutHandler()
-        {
+        logoutHandler(){
             Cookies.remove( `client_id` )
             Cookies.remove( `client_info` )
             Cookies.remove( `token` )
             this.$router.push( `/` )
             location.reload();
-
         },
         getClientInfo( userData){
-            let clientInfo_json = Cookies.get( `client_info` )
-            if ( this.first_name === undefined ){
+            let clientInfo_json = Cookies.get(`client_info`)
+            if ( clientInfo_json && clientInfo_json[`first_name`]){
                 this.first_name = clientInfo_json[`first_name`]
-            
+            } else if ( userData && userData.length > 0 && userData[0].first_name ) {
+                this.first_name = userData[0].first_name
             } else{
-                for ( let i = 0; i < userData.length; i++ ){
-                    this.first_name = userData[i][`first_name`]
-                }
+                this.first_name = null
             }
         },
     },
