@@ -3,9 +3,9 @@
         <section class="main">
             <div class="info__card_holder"  >
                 <h1>Account Settings</h1>
-                    <div  class="info-card" >
+                    <div  class="info-card" v-if="restInfo" >
                         <h2>{{restInfo[`name`]}}</h2>
-                        <div class="user-info"  v-if="restInfo">
+                        <div class="user-info">
                             <p> {{restInfo[`name`] }}</p>
                             <p> Address: {{restInfo[`address`]}}</p>
                             <p> Phone#: {{restInfo[`phone_number`]}}</p>
@@ -31,24 +31,29 @@
                 </div>
             </div>
         </section>
+
     </div>
 </template>
 <script>
 import Cookies from "vue-cookies"
 import axios from "axios";
 import DisplayRestProfile from '@/components/Restaurant/DisplayRestProfile.vue'
-import RemoveRestProfile from  '@/components/Restaurant/RemoveRestProfile.vue'
+import RemoveRestProfile from '@/components/Restaurant/RemoveRestProfile.vue'
+
 export default {
     components: {
         DisplayRestProfile,
-        RemoveRestProfile
+        RemoveRestProfile,
             },
     data() {
         return {
             restaurant_id: Cookies.get(`restaurant_id` ),
             restInfo: undefined,
             is_edit: false,
-            is_remove:false
+            is_remove: false,
+            showToast: false,
+            toastTitle: undefined,
+            toastMessage:undefined
         }
     },
     mounted() {
@@ -68,9 +73,10 @@ export default {
             } ).then( ( response ) =>{
                 this.restInfo = response[`data`][0]
                this.$root.$emit(`restInfo`, this.restInfo)
-            } ).catch( ( error ) =>
-            {
-                error;
+            } ).catch( ( error ) =>{
+                this.toastTitle=`Error`
+                this.toastMessage =error[`response`][`data`]
+                this.showToast = true
             } )
         },
         OpenEditForm(){

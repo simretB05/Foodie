@@ -1,17 +1,24 @@
 <template>
-
+    <div class="login-container">
     <div class="login_card">
         <label for="email"> Enter Your Email</label>
         <input v-model="email_value" type="text" required placeholder="enter your email">
         <label for="first name"> Enter Your Password</label>
         <input v-model="pass_value" type="password" required placeholder="enter your User Password">
         <button @click="getClientResponse" type="submit">submit</button>
+      
     </div>
+    <tost-message v-if="showToast" :title="toastTitle" :message="toastMessage"></tost-message>
+</div>
 </template>
 <script>
+import TostMessage from  '@/components/TostMessage.vue'
 import axios from "axios";
 import Cookies from "vue-cookies"
 export default {
+    components: {
+        TostMessage
+    },
         data() {
             return {
                 pass_value: undefined,
@@ -20,7 +27,10 @@ export default {
                 client_id: undefined,
                 client_info_json: Cookies.get(`client_info`),
                 clientDisplay__Array: [],
-                newObjectData:undefined,
+                newObjectData: undefined,
+                showToast: false,
+                toastTitle: undefined,
+                toastMessage:undefined
             }
         },
     methods: {
@@ -41,19 +51,26 @@ export default {
                 Cookies.set( `client_id`, response[`data`][`client_id`] )
                 this.$router.push(`/`)
             } ).catch((error) =>{
-                error;
-                // if not successful displaying a error mssage
-                this.errorMessage = "Invalid input! Please try again."
+                this.toastTitle=`Error`
+                this.toastMessage =error[`response`][`data`]
+                this.showToast = true
+                
             } )
         },
     }, 
 }
 </script>
 <style scoped>
+.login-container{
+    display: grid;
+  justify-items: center;
+  width: 100%;
+  
+}
 .login_card{
   display: grid;
   justify-items: center;
-  width: 70%;
+  width: 100%;
   margin: 32px auto;
   padding: 20px;
   background-color: #fcfcfb;
@@ -83,7 +100,7 @@ input{
 
 
 button {
-    display: block;
+  display: block;
   width: 30%;
   padding: 10px;
   margin-top: 20px;

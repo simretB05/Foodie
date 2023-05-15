@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div> 
         <div class="menu_card">
                 <label for=" menu item description">Menu item discription</label>
                 <input v-model="description" type="text" required placeholder="Item description">
@@ -9,12 +9,56 @@
                 <input v-model="name" type="text" required placeholder="Item name">
                 <label for="menu item price">Menu item price</label>
                 <input v-model="price" type="text" required placeholder="Item Price">
-                <button @click="saveMenu">Save</button>
-            </div>
+                <button  @click="updateMenu">Save</button>
+        </div> 
+            
     </div>
 </template>
 <script>
-    export default {
+import Cookies from "vue-cookies"
+import axios from "axios";
+export default {
+        props: {
+            menu_id:Number
+         },
+        data() {
+            return {
+                price: this.price,
+                name: this.name,
+                description: this.description,
+                image_url: this.image_url,
+                token:Cookies.get(`restaurant_token`),
+            }
+    },
+    mounted(){
+            
+    },
+    methods: {
+        updateMenu(){
+            axios.request( {
+                url: `https://foodie.bymoen.codes/api/menu`,
+                headers: {
+                    'x-api-key': `qUikCEg0vdshWKhbZQKL`,
+                    token: this.token
+                },
+                method: `PATCH`,
+                data: {
+                price: this.price,
+                name: this.name,
+                description: this.description,
+                image_url: this.image_url,
+                menu_id:this.menu_id
+                }
+            } ).then( () => {
+                this.message = `successfully Edited  Your information`
+                location.reload();
+            } ).catch( ( error ) => {
+                error;
+                this.errorMessage = "Invalid input! Please try again."
+            } )
+
+            }
+        },
         
     }
 </script>
@@ -84,5 +128,4 @@ button {
         width: 20%;
     }
 }
-
 </style>

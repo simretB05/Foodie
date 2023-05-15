@@ -2,7 +2,7 @@
     <div>
         <business-page-header></business-page-header>
         <main class="main">
-            <h2 class="main-title">this is where you find resturans</h2>
+            <h2 class="main-title">this is where you find restaurans</h2>
             <div  class="restaurant_container">
                 <div class="resturan-card" v-for="(rest,i) in responseData" :key="i" >
                     <div class="restaurant_info">
@@ -178,7 +178,7 @@ border-radius: 5px;
     width: 100%;
     }
     .image_holder{
-    width: 70%;
+    width: 100%;
     grid-template-columns:repeat(auto-fit, minmax(360px, 1fr));
 
 }

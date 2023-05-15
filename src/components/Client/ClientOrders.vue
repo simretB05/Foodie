@@ -132,7 +132,7 @@ box-shadow: none;
 }
     @media only screen and (min-width: 900px) {
     .orders_card {
-        width: 60%;
+        width: 35%;
     }
 }
 </style>

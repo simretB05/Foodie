@@ -62,12 +62,11 @@ import Cookies from "vue-cookies"
           } ) 
     },
     addtoCart( details ){
-      let menu_id = details[`target`].getAttribute( `menu_id` )
-      for ( let i = 0; i < this.menuArry.length; i++ ){
-        if ( String( this.menuArry[i][`id`] ) === menu_id ) {
-          this.orderArray.push( this.menuArry[i] )
-          Cookies.set( `orderData`, this.orderArray)
-                
+              let menu_id = details[`target`].getAttribute( `menu_id` )
+              for ( let i = 0; i < this.menuArry.length; i++ ){
+                if ( String( this.menuArry[i][`id`] ) === menu_id ) {
+                  this.orderArray.push( this.menuArry[i] )
+                  Cookies.set( `orderData`, this.orderArray)
                   break
               }
           }

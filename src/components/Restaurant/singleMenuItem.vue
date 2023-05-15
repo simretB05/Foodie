@@ -11,15 +11,13 @@
                   <p class="menu_price"> Price: {{single_menu[`price`]}}$CAD</p>
                   <div class="btn">
                     <button @click="OpenEditForm" class="edit_btn">Edit Menu</button>
-                      <remove-menu :menu_id="single_menu[`id`]" ></remove-menu>
+                      <remove-menu :menu_id="single_menu.id" ></remove-menu>
                   </div>
                 </div>  
-                
               </div>
-              <div v-if="is_edit">
-                <edit-resturant-menu></edit-resturant-menu>
-              </div>
-               
+          </div>
+          <div class="edit-card" v-if="is_edit">
+                  <edit-resturant-menu :menu_id="single_menu.id"></edit-resturant-menu>
           </div>
     </div>
 </template>
@@ -38,7 +36,7 @@ import EditResturantMenu  from '@/components/Restaurant/EditResturantMenu.vue'
   },
             data() {
               return {
-                is_edit: true,
+                is_edit: false,
 
               }
             },
@@ -179,6 +177,9 @@ align-self: start;
 box-shadow: none;
 }
 
+.edit-card{
+  width: 100%;
+}
 @media only screen and (min-width: 600px) {
   .menu_card{
     width:70% ;
@@ -204,7 +205,7 @@ box-shadow: none;
  }
   .menu_card {
   grid-template-columns:repeat(auto-fit, minmax(50px, 1fr));
-  width: 40%;
+  width: 60%;
 }
 .menu_container{
   width: 60%;

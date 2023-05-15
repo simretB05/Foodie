@@ -1,7 +1,7 @@
 <template>
     <div>
         <main class="main">
-            <h1>Create And Save Your Restaurant Men</h1>
+            <h1>Create And Save Your Restaurant Menu</h1>
             <div class="menu_card">
                 <label for=" menu item description">Menu item discription</label>
                 <input v-model="description" type="text" required placeholder="Item description">

@@ -28,7 +28,7 @@
             <div @click="secondaryToggleHandler" class="nav_user_menu_card" > 
                 <img class="nav_user_menu_img" src="/images/icons/menu.svg" alt=" login avatar">
             </div>
-            <h3> Welcome {{ name }}!</h3>
+            <h3 v-if="name" > Welcome {{ name }}!</h3>
         </div>
         <nav v-if="is_primaryNavOpen" class="primary-nav">
             <div class="primary_nav_card">
@@ -39,16 +39,21 @@
                 </div>
                 <h2 class="nav_title">Welcome!</h2>
                 <ul  class="main_nav">
-                    <li class="nav_user_login_card">
-                        <img  class="nav_user_login_img" src="/images/icons/enter.svg" alt="enter icon">
-                        <router-link to="/partner-login"   class="nav-link"><p class="nav_login_text">  Partner Log In</p> </router-link>
-                    </li>
-                    <li class="nav_user_signup_card">
-                        <div class="nav_user_avatar_card" >    
-                            <img class="nav_user_signup_img" src="/images/icons/shop.svg" alt=" login avatar">
-                        </div>
-                        <router-link  to="/partner-signup"  class="nav-link"><p class="nav_singup_text">  PartnerSign Up</p> </router-link> 
-                    </li>
+                    <router-link to="/partner-login"   class="nav-link">
+                        <li class="nav_user_login_card">
+                            <img  class="nav_user_login_img" src="/images/icons/enter.svg" alt="enter icon">
+                            <p class="nav_login_text">  Partner Log In</p>
+                        </li>
+                    </router-link>
+                    <router-link  to="/partner-signup"  class="nav-link">
+                        <li class="nav_user_signup_card">
+                            <div class="nav_user_avatar_card" >    
+                              <img class="nav_user_signup_img" src="/images/icons/shop.svg" alt=" login avatar">
+                           </div>
+                              <p class="nav_singup_text">  PartnerSign Up</p>
+                        </li>
+                    </router-link> 
+                    
                 </ul>
             </div>
         </nav>
@@ -59,7 +64,7 @@
                         <img class="nav_user_menu_img" src="/images/icons/cross.svg" alt=" login avatar">
                     </div>
                 </div>
-                <h3 class="secondery-title">Welcome Partner {{ name }}!</h3>
+                <h3 class="secondery-title" v-if="name">Welcome Partner {{ name }}!</h3>
                 <ul class="secondery_nav_list">
                     <router-link   class="nav-link" to="/partner-profile">
                         <li class="secondery_nav_item">
@@ -91,12 +96,13 @@
             </div>
         </nav>
         <nav  v-if="getRest_id || is_scondaryNavOpen" class="secondary-nav-desktop">
-            <h3 class="seconderydesktop-title">Welcome Partner at {{ name }}!</h3>
+            <h3 class="seconderydesktop-title" v-if="name"> Welcome Partner at {{ name }}!</h3>
             <div  class="secondary_desktopnav_card"  >
                 <ul class="seconderydesktop_nav_list">
                     <router-link   class="nav-link" to="/partner-profile">
                         <li class="seconderydesktop_nav_item">
-                            <img class="desktopitem_img" src="/images/icons/shop.svg" alt=" login avatar"><p  class="seconderydesktopitem_text">View Account</p>
+                            <img class="desktopitem_img" src="/images/icons/shop.svg" alt=" login avatar">
+                            <p  class="seconderydesktopitem_text">View Account</p>
                         </li>
                     </router-link>
                     <router-link   class="nav-link"  to="/partnerSide-order">
@@ -126,49 +132,48 @@
     </header>
 </template>
 <script>
-    // import axios from "axios";
     import Cookies from "vue-cookies"
 export default {
     data() {
         return {
-            // username:undefined,
             getRest_id: Cookies.get(`restaurant_id` ),
-            restInfo_json:undefined,
             is_primaryNavOpen: false,
             is_scondaryNavOpen: false,
             name: undefined,
-            userArray:[]
         }
     },
     methods: {
-        primaryToggleHandler(){
+        primaryToggleHandler()
+        {
             this.is_primaryNavOpen = !this.is_primaryNavOpen
         },
-        secondaryToggleHandler(){
+        secondaryToggleHandler()
+        {
             this.is_scondaryNavOpen = !this.is_scondaryNavOpen
         },
-        logoutHandler(){
+        logoutHandler()
+        {
             Cookies.remove( `restaurant_id` )
             Cookies.remove( `rest_info` )
             Cookies.remove( `restaurant_token` )
-            this.$router.push(`/`)
+            this.$router.push( `/` )
         },
-        getRestaurantInfo( restData ){
+        getRestaurantInfo( restData ) {
             let restInfo_json = Cookies.get( `rest_info` )
-            if ( this.name === undefined ){
-                this.name = restInfo_json[`name`]            
+            if ( restInfo_json && restInfo_json[`name`] ){
+                this.name = restInfo_json[`name`]
+            } else if ( restData && restData.length > 0 && restData[0].name ) {
+                this.name = restData[0].name
             } else{
-                for ( let i = 0; i < restData.length; i++ ){
-                    this.rest_name = restData[i][`name`]
-                }
+                this.name = null
             }
+        
         }
     },
 
     mounted(){
-       
-        this.$root.$on( `restData`, this.  getRestaurantInfo );
-            this.  getRestaurantInfo()
+        this.$root.$on( `restData`, this.getRestaurantInfo );
+       this.getRestaurantInfo()
     }
     }
 </script>
