@@ -36,7 +36,6 @@ export default {
     methods: {
         getClientResponse(){
             axios.request({
-                // Url to send the post Method
                 url: `https://foodie.bymoen.codes/api/client-login`,
                 headers: {
                     'x-api-key': `qUikCEg0vdshWKhbZQKL`

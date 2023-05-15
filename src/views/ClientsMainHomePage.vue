@@ -24,7 +24,6 @@ import PageFooter from '@/components/Client/PageFooter.vue'
             getClient_id: Cookies.get(`client_id`),
             userData:undefined,
             userDataArry: [],
-        
         }
     },
     methods: {

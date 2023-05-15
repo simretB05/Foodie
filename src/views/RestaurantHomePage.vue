@@ -4,7 +4,6 @@
 <business-signup-form></business-signup-form>
     </div>
 </template>
-
 <script>
 import BusinessSignupForm from '@/components/Restaurant/BusinessSignupForm.vue'
 import BusinessLoginForm from '@/components/Restaurant/BusinessLoginForm.vue'

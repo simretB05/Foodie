@@ -60,7 +60,6 @@ export default {
                     showToast: false,
                     toastTitle: undefined,
                     toastMessage:undefined  
-                
                 }
             } ).then( ( response ) => {
                 Cookies.set( `token`, response[`data`][`token`] )

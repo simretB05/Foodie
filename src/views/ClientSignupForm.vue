@@ -21,8 +21,7 @@ import PageFooter from '@/components/Client/PageFooter.vue';
     components: {
             PageHeader,
             ClientSignupForm,
-            PageFooter
-            
+            PageFooter      
     },
         data() {
             return {

@@ -40,7 +40,6 @@ export default {
             getrestaurantsData: undefined,
             responseData: undefined,
             getRestaurant_id: undefined,
-
         }
     },
     methods: {
@@ -57,8 +56,6 @@ export default {
                 }
             }
             this.$router.push( `single-partner-home` )
-
-           
         },
         getRsturants(){
             axios.request( {

@@ -55,8 +55,6 @@ export default {
                     this.confiArray.push( this.orders[i] )
                     Cookies.set( `confirmed_orders`, this.confiArray )
                     this.orders.splice( i, 1 )
-                    // let itemCard = details.target.closest( `.orders_card` )
-                    // itemCard.remove()
                     break
                 }
             }

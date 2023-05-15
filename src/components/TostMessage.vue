@@ -27,7 +27,6 @@
         hideTost(){
             this.show = false    
             location.reload();
-      
         }
         }
     }

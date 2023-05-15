@@ -1,14 +1,13 @@
 <template>
     <div>
         <div class="orders_card" v-for="(order,i) in  confdOrder" :key="i">
-                    <h2 class="order_name">{{order[`name`]}}</h2>
-                        <p class="order_price"> {{order[`price`] }} $CAD</p>
-                        <p class="order_id"> Order  ID {{ order[`order_id`] }}</p>
-                         <complete-clients-orders :order_id="order[`order_id`]"></complete-clients-orders>
+            <h2 class="order_name">{{order[`name`]}}</h2>
+                <p class="order_price"> {{order[`price`] }} $CAD</p>
+                <p class="order_id"> Order  ID {{ order[`order_id`] }}</p>
+                <complete-clients-orders :order_id="order[`order_id`]"></complete-clients-orders>
          </div>
     </div>
 </template>
-
 <script>
 import Cookies from "vue-cookies"
 import CompleteClientsOrders from "./CompleteClientsOrders.vue"

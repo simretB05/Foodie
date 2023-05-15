@@ -26,7 +26,6 @@ import PageFooter from "@/components/Client/PageFooter.vue";
             PageHeader,
             ClientLoginForm,
             PageFooter
-
     },
        
     }

@@ -23,7 +23,6 @@ import GetResturantInProfileVue from '@/components/Restaurant/GetResturantInProf
             }
     },
     methods: {
-      
         },
     }
 </script>

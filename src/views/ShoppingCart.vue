@@ -1,13 +1,11 @@
 <template>
     <div>
         <page-header></page-header>
-
         <main class="main"> 
             <client-shopping-cart></client-shopping-cart>
        </main>
        <page-footer></page-footer>
     </div>
-
 </template>
 
 <script>

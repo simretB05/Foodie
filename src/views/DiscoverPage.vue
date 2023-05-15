@@ -54,9 +54,7 @@ import PageFooter from '@/components/Client/PageFooter.vue'
                     Cookies.set( `restData`, this.rest_json)
                 }
             }
-            this.$router.push( `single-restaurant-home` )
-
-           
+            this.$router.push( `single-restaurant-home` )  
         }
     },
     mounted(){
