@@ -49,7 +49,7 @@ import TostMessage from  '@/components/TostMessage.vue'
                 this.$router.push(`/partner-home`) 
             } ).catch( ( error ) =>{
                 this.toastTitle=`Error`
-                this.toastMessage =error[`response`][`data`][`error`]
+                this.toastMessage =error[`response`][`data`]
                 this.showToast = true
             } )
         }
