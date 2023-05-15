@@ -37,7 +37,7 @@ import RemoveClientProfile from  '@/components/Client/RemoveClientProfile.vue'
 export default {
     components: {
         DisplayEDiteProfileForm,
-        RemoveClientProfile
+        RemoveClientProfile,
             },
     data() {
         return {

@@ -11,13 +11,18 @@
                 <input v-model="price" type="text" required placeholder="Item Price">
                 <button  @click="updateMenu">Save</button>
         </div> 
-            
+        <tost-message  v-if="showToast" :title="toastTitle" :message="toastMessage"></tost-message>
     </div>
 </template>
 <script>
 import Cookies from "vue-cookies"
+import TostMessage from  '@/components/TostMessage.vue'
+
 import axios from "axios";
 export default {
+    components: {
+     TostMessage    
+    },
         props: {
             menu_id:Number
          },
@@ -27,6 +32,9 @@ export default {
                 name: this.name,
                 description: this.description,
                 image_url: this.image_url,
+                showToast: false,
+                toastTitle: undefined,
+                toastMessage:undefined,
                 token:Cookies.get(`restaurant_token`),
             }
     },
@@ -50,11 +58,13 @@ export default {
                 menu_id:this.menu_id
                 }
             } ).then( () => {
-                this.message = `successfully Edited  Your information`
-                location.reload();
+                this.toastTitle = `Success`
+                this.toastMessage = `successfully Edited  Your information`
+                this.showToast = true
             } ).catch( ( error ) => {
-                error;
-                this.errorMessage = "Invalid input! Please try again."
+                this.toastTitle=`Error`
+                this.toastMessage =error[`response`][`data`]
+                this.showToast = true
             } )
 
             }

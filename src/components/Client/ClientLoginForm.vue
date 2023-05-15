@@ -63,13 +63,13 @@ export default {
 .login-container{
     display: grid;
   justify-items: center;
-  width: 100%;
+  width: 80%;
   
 }
 .login_card{
   display: grid;
   justify-items: center;
-  width: 100%;
+  width: 80%;
   margin: 32px auto;
   padding: 20px;
   background-color: #fcfcfb;

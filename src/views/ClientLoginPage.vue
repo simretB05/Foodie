@@ -15,8 +15,6 @@
 </template>
 
 <script>
-// import Cookies from "vue-cookies"
-    // import axios from "axios";
 import PageHeader from '@/components/Client/PageHeader.vue';
 import ClientLoginForm from '@/components/Client/ClientLoginForm.vue';
 import PageFooter from "@/components/Client/PageFooter.vue";
